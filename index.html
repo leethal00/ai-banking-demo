@@ -12,16 +12,20 @@
         }
         
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f5f7fa;
-            color: #333;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #1a1a1a;
+            background: #ffffff;
         }
         
+        /* Header */
         .header {
-            background: linear-gradient(135deg, #16a34a, #22c55e);
-            color: white;
-            padding: 1rem 2rem;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            background: #ffffff;
+            border-bottom: 1px solid #e5e7eb;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
         
         .header-content {
@@ -30,190 +34,429 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            padding: 0 2rem;
         }
         
         .logo {
-            font-size: 1.8rem;
-            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #0066cc;
         }
         
         .nav-links {
             display: flex;
             gap: 2rem;
+            align-items: center;
         }
         
         .nav-links a {
-            color: white;
+            color: #374151;
             text-decoration: none;
-            transition: opacity 0.3s;
+            font-weight: 500;
+            transition: color 0.3s ease;
         }
         
         .nav-links a:hover {
-            opacity: 0.8;
+            color: #0066cc;
         }
         
-        .main-container {
-            max-width: 1200px;
-            margin: 2rem auto;
-            padding: 0 2rem;
+        .login-btn {
+            background: #0066cc;
+            color: white !important;
+            padding: 0.5rem 1.5rem;
+            border-radius: 6px;
+            font-weight: 600;
+            transition: background 0.3s ease;
         }
         
-        .welcome-section {
-            background: white;
-            border-radius: 12px;
-            padding: 2rem;
-            margin-bottom: 2rem;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        .login-btn:hover {
+            background: #0052a3;
+            color: white !important;
         }
         
-        .welcome-title {
-            font-size: 2rem;
-            margin-bottom: 1rem;
-            color: #16a34a;
-        }
-        
-        .account-summary {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 2rem;
-        }
-        
-        .account-card {
-            background: white;
-            border-radius: 12px;
-            padding: 1.5rem;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-            border-left: 4px solid #22c55e;
-        }
-        
-        .account-type {
-            font-size: 0.9rem;
-            color: #666;
-            margin-bottom: 0.5rem;
-        }
-        
-        .account-balance {
-            font-size: 1.8rem;
-            font-weight: bold;
-            color: #16a34a;
-            margin-bottom: 0.5rem;
-        }
-        
-        .account-number {
-            font-size: 0.85rem;
-            color: #888;
-        }
-        
-        .quick-actions {
-            background: white;
-            border-radius: 12px;
-            padding: 2rem;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-        }
-        
-        .actions-title {
-            font-size: 1.3rem;
-            margin-bottom: 1.5rem;
-            color: #16a34a;
-        }
-        
-        .action-buttons {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1rem;
-        }
-        
-        .action-btn {
-            background: linear-gradient(135deg, #22c55e, #16a34a);
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #0066cc 0%, #004499 100%);
             color: white;
-            border: none;
-            padding: 1rem 1.5rem;
-            border-radius: 8px;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: transform 0.2s, box-shadow 0.2s;
+            padding: 4rem 0;
             text-align: center;
         }
         
-        .action-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 25px rgba(42, 82, 152, 0.3);
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 2rem;
         }
         
-        .transactions-section {
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .btn-primary {
+            background: #ffffff;
+            color: #0066cc;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .btn-primary:hover {
+            background: #f8fafc;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            padding: 1rem 2rem;
+            border: 2px solid white;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .btn-secondary:hover {
             background: white;
+            color: #0066cc;
+        }
+        
+        /* Main Container */
+        .main-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+        
+        /* Account Summary Section */
+        .section {
+            margin-bottom: 4rem;
+        }
+        
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+        
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #1a1a1a;
+        }
+        
+        .view-all {
+            color: #0066cc;
+            text-decoration: none;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .view-all:hover {
+            text-decoration: underline;
+        }
+        
+        /* Account Cards */
+        .account-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .account-card {
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
             border-radius: 12px;
             padding: 2rem;
-            margin-top: 2rem;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
         }
         
-        .transactions-title {
-            font-size: 1.3rem;
-            margin-bottom: 1.5rem;
-            color: #16a34a;
+        .account-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .account-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+        
+        .account-type {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: #6b7280;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .account-icon {
+            width: 40px;
+            height: 40px;
+            background: #f3f4f6;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+        
+        .account-balance {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 0.5rem;
+        }
+        
+        .account-balance.negative {
+            color: #dc2626;
+        }
+        
+        .account-number {
+            font-size: 0.875rem;
+            color: #6b7280;
+            font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace;
+        }
+        
+        /* Quick Actions */
+        .actions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+        
+        .action-card {
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: inherit;
+        }
+        
+        .action-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 102, 204, 0.15);
+            border-color: #0066cc;
+        }
+        
+        .action-icon {
+            width: 60px;
+            height: 60px;
+            background: #f0f7ff;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            font-size: 1.5rem;
+            color: #0066cc;
+        }
+        
+        .action-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #1a1a1a;
+        }
+        
+        .action-description {
+            font-size: 0.875rem;
+            color: #6b7280;
+        }
+        
+        /* Transactions */
+        .transactions-container {
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        
+        .transactions-header {
+            padding: 1.5rem 2rem;
+            border-bottom: 1px solid #e5e7eb;
+            background: #f9fafb;
         }
         
         .transaction-item {
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            padding: 1rem 0;
-            border-bottom: 1px solid #eee;
+            justify-content: space-between;
+            padding: 1.5rem 2rem;
+            border-bottom: 1px solid #f3f4f6;
+            transition: background-color 0.2s ease;
+        }
+        
+        .transaction-item:hover {
+            background-color: #f9fafb;
         }
         
         .transaction-item:last-child {
             border-bottom: none;
         }
         
-        .transaction-details {
-            flex: 1;
+        .transaction-left {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
         }
         
-        .transaction-merchant {
+        .transaction-icon {
+            width: 48px;
+            height: 48px;
+            background: #f3f4f6;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+        
+        .transaction-details h4 {
             font-weight: 600;
+            color: #1a1a1a;
             margin-bottom: 0.25rem;
         }
         
         .transaction-date {
-            font-size: 0.85rem;
-            color: #666;
+            font-size: 0.875rem;
+            color: #6b7280;
         }
         
         .transaction-amount {
-            font-weight: bold;
-            color: #16a34a;
+            font-weight: 700;
+            font-size: 1.1rem;
         }
         
         .transaction-amount.debit {
-            color: #d32f2f;
+            color: #dc2626;
         }
         
+        .transaction-amount.credit {
+            color: #16a34a;
+        }
+        
+        /* Footer */
         .footer {
-            background: #16a34a;
-            color: white;
-            text-align: center;
-            padding: 2rem;
-            margin-top: 3rem;
+            background: #1f2937;
+            color: #9ca3af;
+            padding: 3rem 0 2rem;
+            margin-top: 4rem;
         }
         
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            text-align: center;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+        
+        .footer-links a {
+            color: #9ca3af;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: #ffffff;
+        }
+        
+        .footer-bottom {
+            border-top: 1px solid #374151;
+            padding-top: 2rem;
+            font-size: 0.875rem;
+        }
+        
+        /* Responsive Design */
         @media (max-width: 768px) {
             .header-content {
-                flex-direction: column;
-                gap: 1rem;
+                padding: 0 1rem;
             }
             
             .nav-links {
                 gap: 1rem;
             }
             
-            .main-container {
-                padding: 0 1rem;
+            .hero h1 {
+                font-size: 2rem;
             }
             
-            .action-buttons {
+            .main-container {
+                padding: 2rem 1rem;
+            }
+            
+            .section-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+            
+            .account-grid {
                 grid-template-columns: 1fr;
+            }
+            
+            .actions-grid {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .transaction-item {
+                padding: 1rem;
+            }
+            
+            .footer-links {
+                flex-direction: column;
+                gap: 1rem;
             }
         }
     </style>
@@ -221,125 +464,218 @@
 <body>
     <header class="header">
         <div class="header-content">
-            <div class="logo">🏦 SecureBank</div>
+            <div class="logo">
+                🏦 SecureBank
+            </div>
             <nav class="nav-links">
                 <a href="#accounts">Accounts</a>
                 <a href="#transfers">Transfers</a>
                 <a href="#payments">Payments</a>
                 <a href="#support">Support</a>
-                <a href="#logout">Logout</a>
+                <a href="#login" class="login-btn">Sign In</a>
             </nav>
         </div>
     </header>
 
-    <main class="main-container">
-        <section class="welcome-section">
-            <h1 class="welcome-title">Welcome back, John!</h1>
-            <p>Here's your account overview for today, August 10, 2025</p>
-        </section>
-
-        <section class="account-summary">
-            <div class="account-card">
-                <div class="account-type">Everyday Transaction Account</div>
-                <div class="account-balance">$4,287.50</div>
-                <div class="account-number">••••1234</div>
-            </div>
-            
-            <div class="account-card">
-                <div class="account-type">High Interest Savings</div>
-                <div class="account-balance">$15,920.00</div>
-                <div class="account-number">••••5678</div>
-            </div>
-            
-            <div class="account-card">
-                <div class="account-type">Home Loan</div>
-                <div class="account-balance">-$285,600.00</div>
-                <div class="account-number">••••9012</div>
-            </div>
-        </section>
-
-        <section class="quick-actions">
-            <h2 class="actions-title">Quick Actions</h2>
-            <div class="action-buttons">
-                <button class="action-btn">Transfer Money</button>
-                <button class="action-btn">Pay Bills</button>
-                <button class="action-btn">View Statements</button>
-                <button class="action-btn">Apply for Credit</button>
-                <button class="action-btn">Find ATM</button>
-                <button class="action-btn">Contact Support</button>
-            </div>
-        </section>
-
-        <section class="transactions-section">
-            <h2 class="transactions-title">Recent Transactions</h2>
-            
-            <div class="transaction-item">
-                <div class="transaction-details">
-                    <div class="transaction-merchant">Woolworths Supermarket</div>
-                    <div class="transaction-date">Today, 2:30 PM</div>
-                </div>
-                <div class="transaction-amount debit">-$67.85</div>
-            </div>
-            
-            <div class="transaction-item">
-                <div class="transaction-details">
-                    <div class="transaction-merchant">Salary Deposit - TechCorp</div>
-                    <div class="transaction-date">Yesterday, 9:00 AM</div>
-                </div>
-                <div class="transaction-amount">+$2,840.00</div>
-            </div>
-            
-            <div class="transaction-item">
-                <div class="transaction-details">
-                    <div class="transaction-merchant">Netflix Monthly</div>
-                    <div class="transaction-date">Aug 8, 2025</div>
-                </div>
-                <div class="transaction-amount debit">-$19.99</div>
-            </div>
-            
-            <div class="transaction-item">
-                <div class="transaction-details">
-                    <div class="transaction-merchant">Coffee Club - Collins St</div>
-                    <div class="transaction-date">Aug 7, 2025</div>
-                </div>
-                <div class="transaction-amount debit">-$8.50</div>
-            </div>
-            
-            <div class="transaction-item">
-                <div class="transaction-details">
-                    <div class="transaction-merchant">Myki Top Up</div>
-                    <div class="transaction-date">Aug 6, 2025</div>
-                </div>
-                <div class="transaction-amount debit">-$30.00</div>
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Welcome back, John!</h1>
+            <p>Your personalized banking dashboard. Manage your finances with confidence and ease.</p>
+            <div class="cta-buttons">
+                <a href="#accounts" class="btn-primary">View Accounts</a>
+                <a href="#transfers" class="btn-secondary">Quick Transfer</a>
             </div>
         </div>
+    </section>
+
+    <main class="main-container">
+        <section class="section">
+            <div class="section-header">
+                <h2 class="section-title">Account Overview</h2>
+                <a href="#" class="view-all">View All →</a>
+            </div>
+            
+            <div class="account-grid">
+                <div class="account-card">
+                    <div class="account-header">
+                        <div>
+                            <div class="account-type">Everyday Transaction</div>
+                            <div class="account-number">••••1234</div>
+                        </div>
+                        <div class="account-icon">💳</div>
+                    </div>
+                    <div class="account-balance">$4,287.50</div>
+                </div>
+                
+                <div class="account-card">
+                    <div class="account-header">
+                        <div>
+                            <div class="account-type">High Interest Savings</div>
+                            <div class="account-number">••••5678</div>
+                        </div>
+                        <div class="account-icon">💰</div>
+                    </div>
+                    <div class="account-balance">$15,920.00</div>
+                </div>
+                
+                <div class="account-card">
+                    <div class="account-header">
+                        <div>
+                            <div class="account-type">Home Loan</div>
+                            <div class="account-number">••••9012</div>
+                        </div>
+                        <div class="account-icon">🏠</div>
+                    </div>
+                    <div class="account-balance negative">-$285,600.00</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="section-header">
+                <h2 class="section-title">Quick Actions</h2>
+            </div>
+            
+            <div class="actions-grid">
+                <div class="action-card" onclick="showAlert('Transfer Money')">
+                    <div class="action-icon">💸</div>
+                    <div class="action-title">Transfer Money</div>
+                    <div class="action-description">Send money instantly to any account</div>
+                </div>
+                
+                <div class="action-card" onclick="showAlert('Pay Bills')">
+                    <div class="action-icon">🧾</div>
+                    <div class="action-title">Pay Bills</div>
+                    <div class="action-description">Pay utilities, credit cards, and more</div>
+                </div>
+                
+                <div class="action-card" onclick="showAlert('View Statements')">
+                    <div class="action-icon">📊</div>
+                    <div class="action-title">View Statements</div>
+                    <div class="action-description">Download your monthly statements</div>
+                </div>
+                
+                <div class="action-card" onclick="showAlert('Apply for Credit')">
+                    <div class="action-icon">💳</div>
+                    <div class="action-title">Apply for Credit</div>
+                    <div class="action-description">Get pre-approved for loans and cards</div>
+                </div>
+                
+                <div class="action-card" onclick="showAlert('Find ATM')">
+                    <div class="action-icon">🏧</div>
+                    <div class="action-title">Find ATM</div>
+                    <div class="action-description">Locate nearby ATMs and branches</div>
+                </div>
+                
+                <div class="action-card" onclick="showAlert('Contact Support')">
+                    <div class="action-icon">💬</div>
+                    <div class="action-title">Contact Support</div>
+                    <div class="action-description">24/7 customer service support</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="section-header">
+                <h2 class="section-title">Recent Transactions</h2>
+                <a href="#" class="view-all">View All →</a>
+            </div>
+            
+            <div class="transactions-container">
+                <div class="transactions-header">
+                    <h3>Latest Activity</h3>
+                </div>
+                
+                <div class="transaction-item">
+                    <div class="transaction-left">
+                        <div class="transaction-icon">🛒</div>
+                        <div class="transaction-details">
+                            <h4>Woolworths Supermarket</h4>
+                            <div class="transaction-date">Today, 2:30 PM</div>
+                        </div>
+                    </div>
+                    <div class="transaction-amount debit">-$67.85</div>
+                </div>
+                
+                <div class="transaction-item">
+                    <div class="transaction-left">
+                        <div class="transaction-icon">💼</div>
+                        <div class="transaction-details">
+                            <h4>Salary Deposit - TechCorp</h4>
+                            <div class="transaction-date">Yesterday, 9:00 AM</div>
+                        </div>
+                    </div>
+                    <div class="transaction-amount credit">+$2,840.00</div>
+                </div>
+                
+                <div class="transaction-item">
+                    <div class="transaction-left">
+                        <div class="transaction-icon">🎬</div>
+                        <div class="transaction-details">
+                            <h4>Netflix Monthly</h4>
+                            <div class="transaction-date">Aug 8, 2025</div>
+                        </div>
+                    </div>
+                    <div class="transaction-amount debit">-$19.99</div>
+                </div>
+                
+                <div class="transaction-item">
+                    <div class="transaction-left">
+                        <div class="transaction-icon">☕</div>
+                        <div class="transaction-details">
+                            <h4>Coffee Club - Collins St</h4>
+                            <div class="transaction-date">Aug 7, 2025</div>
+                        </div>
+                    </div>
+                    <div class="transaction-amount debit">-$8.50</div>
+                </div>
+                
+                <div class="transaction-item">
+                    <div class="transaction-left">
+                        <div class="transaction-icon">🚇</div>
+                        <div class="transaction-details">
+                            <h4>Myki Top Up</h4>
+                            <div class="transaction-date">Aug 6, 2025</div>
+                        </div>
+                    </div>
+                    <div class="transaction-amount debit">-$30.00</div>
+                </div>
+            </div>
+        </section>
     </main>
 
     <footer class="footer">
-        <p>&copy; 2025 SecureBank. All rights reserved. | Member FDIC | Your deposits are protected.</p>
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+                <a href="#">Security</a>
+                <a href="#">Accessibility</a>
+                <a href="#">Careers</a>
+                <a href="#">Contact</a>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 SecureBank. All rights reserved. | Member FDIC | Your deposits are protected up to $250,000.</p>
+            </div>
+        </div>
     </footer>
 
     <script>
-        // Add some interactivity for demo purposes
-        document.querySelectorAll('.action-btn').forEach(btn => {
-            btn.addEventListener('click', function() {
-                alert(`${this.textContent} feature would open here in a real banking app`);
-            });
-        });
+        function showAlert(action) {
+            alert(`${action} feature would open here in a real banking app`);
+        }
 
-        // Simulate real-time balance updates
+        // Simulate real-time balance updates (less frequent for better UX)
         setInterval(() => {
-            const balanceElements = document.querySelectorAll('.account-balance');
+            const balanceElements = document.querySelectorAll('.account-balance:not(.negative)');
             balanceElements.forEach(el => {
-                if (!el.textContent.includes('-')) {
-                    const currentBalance = parseFloat(el.textContent.replace(/[$,]/g, ''));
-                    // Small random fluctuation for demo
-                    const change = (Math.random() - 0.5) * 0.1;
-                    const newBalance = currentBalance + change;
-                    el.textContent = `$${newBalance.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',')}`;
-                }
+                const currentBalance = parseFloat(el.textContent.replace(/[$,]/g, ''));
+                // Very small random fluctuation for demo
+                const change = (Math.random() - 0.5) * 0.05;
+                const newBalance = currentBalance + change;
+                el.textContent = `$${newBalance.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',')}`;
             });
-        }, 30000); // Update every 30 seconds
+        }, 60000); // Update every minute
     </script>
 </body>
 </html>
