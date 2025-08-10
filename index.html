@@ -658,6 +658,78 @@
             color: #1a1a1a;
         }
 
+        /* Bank Lookup Styles */
+        .bank-lookup {
+            position: relative;
+        }
+
+        .bank-search-input {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.2s;
+        }
+
+        .bank-search-input:focus {
+            outline: none;
+            border-color: #0066cc;
+            box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.1);
+        }
+
+        .bank-dropdown {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: white;
+            border: 1px solid #d1d5db;
+            border-top: none;
+            border-radius: 0 0 8px 8px;
+            max-height: 200px;
+            overflow-y: auto;
+            z-index: 10;
+            display: none;
+        }
+
+        .bank-dropdown.show {
+            display: block;
+        }
+
+        .bank-option {
+            padding: 0.75rem 1rem;
+            cursor: pointer;
+            border-bottom: 1px solid #f3f4f6;
+            transition: background-color 0.2s;
+        }
+
+        .bank-option:hover {
+            background-color: #f9fafb;
+        }
+
+        .bank-option:last-child {
+            border-bottom: none;
+        }
+
+        .bank-name {
+            font-weight: 600;
+            color: #1a1a1a;
+        }
+
+        .bank-details {
+            font-size: 0.875rem;
+            color: #6b7280;
+            margin-top: 0.25rem;
+        }
+
+        .no-results {
+            padding: 1rem;
+            text-align: center;
+            color: #6b7280;
+            font-style: italic;
+        }
+
         @keyframes fadeIn {
             from { opacity: 0; }
             to { opacity: 1; }
@@ -1075,7 +1147,12 @@
 
                     <div class="form-group">
                         <label class="form-label">Recipient Bank Name</label>
-                        <input type="text" class="form-input" id="bankName" placeholder="Full bank name" required>
+                        <div class="bank-lookup">
+                            <input type="text" class="bank-search-input" id="bankSearch" placeholder="Type to search for banks worldwide..." autocomplete="off">
+                            <div class="bank-dropdown" id="bankDropdown"></div>
+                            <input type="hidden" id="selectedBankData">
+                        </div>
+                        <div class="form-help">Search for banks by name, city, or country</div>
                     </div>
 
                     <div class="form-group">
@@ -1155,6 +1232,179 @@
             alert(`${action} feature would open here in a real banking app`);
         }
 
+        // Global Bank Database
+        const globalBanks = [
+            // United States
+            { name: "JPMorgan Chase Bank", swift: "CHASUS33XXX", country: "United States", city: "New York" },
+            { name: "Bank of America", swift: "BOFAUS3NXXX", country: "United States", city: "Charlotte" },
+            { name: "Wells Fargo Bank", swift: "WFBIUS6SXXX", country: "United States", city: "San Francisco" },
+            { name: "Citibank", swift: "CITIUS33XXX", country: "United States", city: "New York" },
+            { name: "Goldman Sachs Bank", swift: "GSBLUS33XXX", country: "United States", city: "New York" },
+            { name: "Morgan Stanley Bank", swift: "SSTGUS33XXX", country: "United States", city: "New York" },
+            
+            // United Kingdom
+            { name: "HSBC Bank", swift: "HBUKGB4BXXX", country: "United Kingdom", city: "London" },
+            { name: "Barclays Bank", swift: "BARCGB22XXX", country: "United Kingdom", city: "London" },
+            { name: "Lloyds Bank", swift: "LOYDGB21XXX", country: "United Kingdom", city: "London" },
+            { name: "Royal Bank of Scotland", swift: "RBOSGB2LXXX", country: "United Kingdom", city: "Edinburgh" },
+            { name: "Standard Chartered Bank", swift: "SCBLGB2LXXX", country: "United Kingdom", city: "London" },
+            { name: "NatWest Bank", swift: "NWBKGB2LXXX", country: "United Kingdom", city: "London" },
+            
+            // Canada
+            { name: "Royal Bank of Canada", swift: "ROYCCAT2XXX", country: "Canada", city: "Toronto" },
+            { name: "Toronto-Dominion Bank", swift: "TDOMCATTXXX", country: "Canada", city: "Toronto" },
+            { name: "Bank of Nova Scotia", swift: "NOSCCATTXXX", country: "Canada", city: "Halifax" },
+            { name: "Bank of Montreal", swift: "BOFMCAM2XXX", country: "Canada", city: "Montreal" },
+            { name: "Canadian Imperial Bank", swift: "CIBCCATTXXX", country: "Canada", city: "Toronto" },
+            
+            // Germany
+            { name: "Deutsche Bank", swift: "DEUTDEFFXXX", country: "Germany", city: "Frankfurt" },
+            { name: "Commerzbank", swift: "COBADEFFXXX", country: "Germany", city: "Frankfurt" },
+            { name: "DZ Bank", swift: "GENODEFFXXX", country: "Germany", city: "Frankfurt" },
+            { name: "Hypovereinsbank", swift: "HYVEDEMMXXX", country: "Germany", city: "Munich" },
+            
+            // France
+            { name: "BNP Paribas", swift: "BNPAFRPPXXX", country: "France", city: "Paris" },
+            { name: "Crédit Agricole", swift: "AGRIFRPPXXX", country: "France", city: "Paris" },
+            { name: "Société Générale", swift: "SOGEFRPPXXX", country: "France", city: "Paris" },
+            { name: "Crédit Lyonnais", swift: "LYONFRPPXXX", country: "France", city: "Paris" },
+            
+            // Japan
+            { name: "Mitsubishi UFJ Bank", swift: "BOTKJPJTXXX", country: "Japan", city: "Tokyo" },
+            { name: "Sumitomo Mitsui Bank", swift: "SMBCJPJTXXX", country: "Japan", city: "Tokyo" },
+            { name: "Mizuho Bank", swift: "MHCBJPJTXXX", country: "Japan", city: "Tokyo" },
+            { name: "Japan Post Bank", swift: "JPPSJPJ1XXX", country: "Japan", city: "Tokyo" },
+            
+            // Singapore
+            { name: "DBS Bank", swift: "DBSSSGSGXXX", country: "Singapore", city: "Singapore" },
+            { name: "United Overseas Bank", swift: "UOVBSGSGXXX", country: "Singapore", city: "Singapore" },
+            { name: "OCBC Bank", swift: "OCBCSGSGXXX", country: "Singapore", city: "Singapore" },
+            
+            // Hong Kong
+            { name: "Hongkong and Shanghai Banking Corporation", swift: "HSBCHKHHHKH", country: "Hong Kong", city: "Hong Kong" },
+            { name: "Bank of China (Hong Kong)", swift: "BKCHHKHHXXX", country: "Hong Kong", city: "Hong Kong" },
+            { name: "Standard Chartered Bank (Hong Kong)", swift: "SCBLHKHHXXX", country: "Hong Kong", city: "Hong Kong" },
+            
+            // Switzerland
+            { name: "UBS Switzerland", swift: "UBSWCHZHXXX", country: "Switzerland", city: "Zurich" },
+            { name: "Credit Suisse", swift: "CRESCHZZXXX", country: "Switzerland", city: "Zurich" },
+            { name: "PostFinance", swift: "POFICHBEXXX", country: "Switzerland", city: "Bern" },
+            
+            // Netherlands
+            { name: "ING Bank", swift: "INGBNL2AXXX", country: "Netherlands", city: "Amsterdam" },
+            { name: "ABN AMRO Bank", swift: "ABNANL2AXXX", country: "Netherlands", city: "Amsterdam" },
+            { name: "Rabobank", swift: "RABONL2UXXX", country: "Netherlands", city: "Utrecht" },
+            
+            // Australia (for comparison)
+            { name: "Commonwealth Bank of Australia", swift: "CTBAAU2SXXX", country: "Australia", city: "Sydney" },
+            { name: "ANZ Bank", swift: "ANZBAU3MXXX", country: "Australia", city: "Melbourne" },
+            { name: "Westpac Banking Corporation", swift: "WPACAU2SXXX", country: "Australia", city: "Sydney" },
+            { name: "National Australia Bank", swift: "NATAAU33XXX", country: "Australia", city: "Melbourne" },
+            
+            // New Zealand
+            { name: "ANZ Bank New Zealand", swift: "ANZBNZ22XXX", country: "New Zealand", city: "Auckland" },
+            { name: "ASB Bank", swift: "ASBBNZ2AXXX", country: "New Zealand", city: "Auckland" },
+            { name: "Bank of New Zealand", swift: "BKNZNZ22XXX", country: "New Zealand", city: "Wellington" },
+            { name: "Westpac New Zealand", swift: "WPACNZ2WXXX", country: "New Zealand", city: "Auckland" },
+            
+            // Other Major Banks
+            { name: "Industrial and Commercial Bank of China", swift: "ICBKCNBJXXX", country: "China", city: "Beijing" },
+            { name: "China Construction Bank", swift: "PCBCCNBJXXX", country: "China", city: "Beijing" },
+            { name: "Agricultural Bank of China", swift: "ABOCCNBJXXX", country: "China", city: "Beijing" },
+            { name: "State Bank of India", swift: "SBININBBXXX", country: "India", city: "Mumbai" },
+            { name: "HDFC Bank", swift: "HDFCINBBXXX", country: "India", city: "Mumbai" },
+            { name: "ICICI Bank", swift: "ICICINBBXXX", country: "India", city: "Mumbai" },
+        ];
+
+        // Bank Search Functions
+        function initializeBankSearch() {
+            const searchInput = document.getElementById('bankSearch');
+            const dropdown = document.getElementById('bankDropdown');
+            
+            if (!searchInput) return;
+            
+            searchInput.addEventListener('input', function() {
+                const query = this.value.trim().toLowerCase();
+                if (query.length < 2) {
+                    dropdown.classList.remove('show');
+                    return;
+                }
+                
+                const filteredBanks = globalBanks.filter(bank => 
+                    bank.name.toLowerCase().includes(query) ||
+                    bank.country.toLowerCase().includes(query) ||
+                    bank.city.toLowerCase().includes(query) ||
+                    bank.swift.toLowerCase().includes(query)
+                );
+                
+                displayBankResults(filteredBanks, query);
+            });
+            
+            // Hide dropdown when clicking outside
+            document.addEventListener('click', function(e) {
+                if (!searchInput.contains(e.target) && !dropdown.contains(e.target)) {
+                    dropdown.classList.remove('show');
+                }
+            });
+        }
+
+        function displayBankResults(banks, query) {
+            const dropdown = document.getElementById('bankDropdown');
+            dropdown.innerHTML = '';
+            
+            if (banks.length === 0) {
+                dropdown.innerHTML = '<div class="no-results">No banks found matching your search</div>';
+            } else {
+                banks.slice(0, 10).forEach(bank => { // Limit to 10 results
+                    const option = document.createElement('div');
+                    option.className = 'bank-option';
+                    option.innerHTML = `
+                        <div class="bank-name">${highlightMatch(bank.name, query)}</div>
+                        <div class="bank-details">${bank.city}, ${bank.country} • ${bank.swift}</div>
+                    `;
+                    
+                    option.addEventListener('click', function() {
+                        selectBank(bank);
+                    });
+                    
+                    dropdown.appendChild(option);
+                });
+            }
+            
+            dropdown.classList.add('show');
+        }
+
+        function highlightMatch(text, query) {
+            if (!query) return text;
+            const regex = new RegExp(`(${query})`, 'gi');
+            return text.replace(regex, '<strong>$1</strong>');
+        }
+
+        function selectBank(bank) {
+            const searchInput = document.getElementById('bankSearch');
+            const dropdown = document.getElementById('bankDropdown');
+            const swiftInput = document.getElementById('swiftCode');
+            const selectedBankData = document.getElementById('selectedBankData');
+            
+            // Update the input field
+            searchInput.value = bank.name;
+            
+            // Auto-populate SWIFT code
+            swiftInput.value = bank.swift;
+            
+            // Store selected bank data
+            selectedBankData.value = JSON.stringify(bank);
+            
+            // Hide dropdown
+            dropdown.classList.remove('show');
+            
+            // Add visual feedback
+            swiftInput.style.backgroundColor = '#f0f7ff';
+            setTimeout(() => {
+                swiftInput.style.backgroundColor = '';
+            }, 2000);
+        }
+
         // Payment Modal Functions
         function openPaymentModal() {
             document.getElementById('paymentModal').classList.add('show');
@@ -1215,6 +1465,9 @@
             // Handle currency change
             document.getElementById('currency').addEventListener('change', updateExchangeRate);
             document.getElementById('sendAmount').addEventListener('input', calculateReceivedAmount);
+            
+            // Initialize bank search
+            initializeBankSearch();
             
             // Initialize with default exchange rate
             updateExchangeRate();
@@ -1293,12 +1546,12 @@ This transfer will be processed immediately via the NPP network.`);
         function processInternationalTransfer() {
             const amount = document.getElementById('sendAmount').value;
             const currency = document.getElementById('currency').value;
-            const bankName = document.getElementById('bankName').value;
+            const bankSearch = document.getElementById('bankSearch').value;
             const swiftCode = document.getElementById('swiftCode').value;
             const holderName = document.getElementById('holderName').value;
             const purpose = document.getElementById('paymentPurpose').value;
             
-            if (!amount || !bankName || !swiftCode || !holderName || !purpose) {
+            if (!amount || !bankSearch || !swiftCode || !holderName || !purpose) {
                 alert('Please fill in all required fields');
                 return;
             }
@@ -1314,7 +1567,7 @@ Transfer Fee: $25.00 AUD
 Recipient Receives: ${receivedAmount} ${currency}
 
 To: ${holderName}
-Bank: ${bankName} (${swiftCode})
+Bank: ${bankSearch} (${swiftCode})
 Purpose: ${purpose}
 
 Your transfer will be reviewed and processed within 1-2 business days.
