@@ -1,0 +1,185 @@
+name: Deploy Banking Demo + AI Assistant
+
+# Trigger on pushes to main AND when issues are created/labeled
+on:
+  push:
+    branches: [ main ]
+  issues:
+    types: [opened, labeled]
+
+# Required for GitHub Pages deployment
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+  issues: write
+  pull-requests: write
+
+jobs:
+  # Deploy website to GitHub Pages
+  deploy:
+    if: github.event_name == 'push'
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+        
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: '.'
+          
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+
+  # AI Assistant for processing issues
+  ai-assistant:
+    if: contains(github.event.issue.labels.*.name, 'ai-task') || (github.event.action == 'opened' && contains(github.event.issue.title, '[AI]'))
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          
+      - name: Process Issue with Claude
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # Install dependencies
+          npm install axios
+          
+          # Create the AI processor script
+          cat > process_issue.js << 'EOF'
+          const axios = require('axios');
+          const fs = require('fs');
+          const { execSync } = require('child_process');
+          
+          async function processIssue() {
+            const issueTitle = process.env.ISSUE_TITLE;
+            const issueBody = process.env.ISSUE_BODY;
+            const issueNumber = process.env.ISSUE_NUMBER;
+            
+            console.log(`Processing issue #${issueNumber}: ${issueTitle}`);
+            
+            // Read current HTML
+            const currentHtml = fs.readFileSync('index.html', 'utf8');
+            
+            // Prepare Claude API request
+            const prompt = `I have a banking demo website and need to make changes based on this GitHub issue:
+
+          **Issue Title:** ${issueTitle}
+          **Issue Description:** ${issueBody}
+
+          **Current HTML code:**
+          ${currentHtml}
+
+          Please provide the modified HTML code that addresses this issue. The changes should be:
+          1. Professional and banking-appropriate
+          2. Visually noticeable for demo purposes
+          3. Safe and secure (no security vulnerabilities)
+
+          Common change types:
+          - Colors (headers, buttons, backgrounds)
+          - Text content (titles, labels, messages)
+          - Adding or modifying UI elements
+          - Layout adjustments
+
+          Provide only the complete modified HTML code in your response. Start with <!DOCTYPE html> and include everything.`;
+
+            try {
+              // Call Claude API
+              const response = await axios.post('https://api.anthropic.com/v1/messages', {
+                model: 'claude-3-sonnet-20240229',
+                max_tokens: 4000,
+                messages: [{ role: 'user', content: prompt }]
+              }, {
+                headers: {
+                  'Content-Type': 'application/json',
+                  'x-api-key': process.env.ANTHROPIC_API_KEY,
+                  'anthropic-version': '2023-06-01'
+                }
+              });
+              
+              const newHtml = response.data.content[0].text;
+              
+              // Check if Claude provided HTML
+              if (newHtml.includes('<!DOCTYPE html>')) {
+                // Write the new HTML
+                fs.writeFileSync('index.html', newHtml);
+                console.log('✅ Successfully updated index.html');
+                
+                // Set output for next step
+                execSync('echo "changes_made=true" >> $GITHUB_OUTPUT');
+              } else {
+                console.log('❌ Claude did not return valid HTML');
+                execSync('echo "changes_made=false" >> $GITHUB_OUTPUT');
+              }
+              
+            } catch (error) {
+              console.error('Error calling Claude API:', error.response?.data || error.message);
+              execSync('echo "changes_made=false" >> $GITHUB_OUTPUT');
+            }
+          }
+          
+          processIssue();
+          EOF
+          
+          # Run the processor
+          ISSUE_TITLE="${{ github.event.issue.title }}" \
+          ISSUE_BODY="${{ github.event.issue.body }}" \
+          ISSUE_NUMBER="${{ github.event.issue.number }}" \
+          node process_issue.js
+          
+      - name: Create Pull Request
+        id: create-pr
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # Check if there are changes
+          if git diff --quiet; then
+            echo "No changes were made"
+            exit 0
+          fi
+          
+          # Configure git
+          git config --global user.name "AI Assistant"
+          git config --global user.email "ai-assistant@github-actions.com"
+          
+          # Create new branch
+          BRANCH_NAME="ai-fix-issue-${{ github.event.issue.number }}"
+          git checkout -b $BRANCH_NAME
+          
+          # Commit changes
+          git add index.html
+          git commit -m "AI: Fix issue #${{ github.event.issue.number }} - ${{ github.event.issue.title }}"
+          
+          # Push branch
+          git push origin $BRANCH_NAME
+          
+          # Create PR using GitHub API
+          curl -X POST \
+            -H "Authorization: token $GITHUB_TOKEN" \
+            -H "Accept: application/vnd.github.v3+json" \
+            https://api.github.com/repos/${{ github.repository }}/pulls \
+            -d '{
+              "title": "🤖 AI Fix: ${{ github.event.issue.title }}",
+              "body": "This PR automatically addresses issue #${{ github.event.issue.number }}.\n\n**Changes made by AI:**\n- Processed issue: ${{ github.event.issue.title }}\n- Made requested modifications to the banking demo website\n\n**Original Issue:**\n${{ github.event.issue.body }}\n\n**Demo Instructions:**\n1. Review the changes in the Files tab\n2. Merge this PR to deploy changes\n3. Check the live site at: https://${{ github.repository_owner }}.github.io/ai-banking-demo\n\nPlease review and merge if the changes look correct! 🚀",
+              "head": "'$BRANCH_NAME'",
+              "base": "main"
+            }'
+          
+          echo "✅ Created PR for issue #${{ github.event.issue.number }}"
