@@ -413,6 +413,267 @@
             font-size: 0.875rem;
         }
         
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal.show {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 16px;
+            max-width: 600px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
+            animation: slideUp 0.3s ease;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 2rem 2rem 0;
+            border-bottom: 1px solid #e5e7eb;
+            padding-bottom: 1rem;
+        }
+
+        .modal-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #1a1a1a;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #6b7280;
+            padding: 0.5rem;
+            border-radius: 8px;
+            transition: all 0.2s;
+        }
+
+        .close-btn:hover {
+            background: #f3f4f6;
+            color: #1a1a1a;
+        }
+
+        .modal-body {
+            padding: 2rem;
+        }
+
+        .payment-options {
+            display: grid;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .payment-option {
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .payment-option:hover {
+            border-color: #0066cc;
+            background: #f0f7ff;
+        }
+
+        .payment-option.selected {
+            border-color: #0066cc;
+            background: #f0f7ff;
+        }
+
+        .payment-option-icon {
+            width: 48px;
+            height: 48px;
+            background: #f3f4f6;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .payment-option-content h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+            color: #1a1a1a;
+        }
+
+        .payment-option-content p {
+            font-size: 0.875rem;
+            color: #6b7280;
+        }
+
+        .form-section {
+            display: none;
+            margin-top: 2rem;
+        }
+
+        .form-section.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #374151;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.2s;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: #0066cc;
+            box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.1);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .form-select {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            font-size: 1rem;
+            background: white;
+            cursor: pointer;
+        }
+
+        .form-textarea {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            font-size: 1rem;
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        .form-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: flex-end;
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #e5e7eb;
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-cancel {
+            background: #f3f4f6;
+            color: #374151;
+        }
+
+        .btn-cancel:hover {
+            background: #e5e7eb;
+        }
+
+        .btn-submit {
+            background: #0066cc;
+            color: white;
+        }
+
+        .btn-submit:hover {
+            background: #0052a3;
+        }
+
+        .btn-submit:disabled {
+            background: #9ca3af;
+            cursor: not-allowed;
+        }
+
+        .form-help {
+            font-size: 0.875rem;
+            color: #6b7280;
+            margin-top: 0.25rem;
+        }
+
+        .amount-display {
+            background: #f9fafb;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .amount-label {
+            font-size: 0.875rem;
+            color: #6b7280;
+            margin-bottom: 0.25rem;
+        }
+
+        .amount-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #1a1a1a;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideUp {
+            from { 
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to { 
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
         /* Responsive Design */
         @media (max-width: 768px) {
             .header-content {
@@ -457,6 +718,24 @@
             .footer-links {
                 flex-direction: column;
                 gap: 1rem;
+            }
+            
+            .modal-content {
+                width: 95%;
+                max-height: 95vh;
+            }
+            
+            .modal-header,
+            .modal-body {
+                padding: 1.5rem;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .form-actions {
+                flex-direction: column;
             }
         }
     </style>
@@ -537,10 +816,10 @@
             </div>
             
             <div class="actions-grid">
-                <div class="action-card" onclick="showAlert('Transfer Money')">
+                <div class="action-card" onclick="openPaymentModal()">
                     <div class="action-icon">💸</div>
                     <div class="action-title">Transfer Money</div>
-                    <div class="action-description">Send money instantly to any account</div>
+                    <div class="action-description">Send money domestically or internationally</div>
                 </div>
                 
                 <div class="action-card" onclick="showAlert('Pay Bills')">
@@ -660,10 +939,403 @@
         </div>
     </footer>
 
+    <!-- Payment Modal -->
+    <div id="paymentModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Transfer Money</h2>
+                <button class="close-btn" onclick="closePaymentModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <!-- Payment Type Selection -->
+                <div id="paymentSelection">
+                    <h3 style="margin-bottom: 1rem; color: #374151;">Choose Transfer Type</h3>
+                    <div class="payment-options">
+                        <div class="payment-option" onclick="selectPaymentType('domestic')">
+                            <div class="payment-option-icon">🏛️</div>
+                            <div class="payment-option-content">
+                                <h3>Domestic Transfer</h3>
+                                <p>Send money within Australia via NPP (New Payments Platform) - Instant transfers</p>
+                            </div>
+                        </div>
+                        <div class="payment-option" onclick="selectPaymentType('international')">
+                            <div class="payment-option-icon">🌍</div>
+                            <div class="payment-option-content">
+                                <h3>International Transfer</h3>
+                                <p>Send money overseas via SWIFT network - 1-5 business days</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Domestic Payment Form -->
+                <div id="domesticForm" class="form-section">
+                    <h3 style="margin-bottom: 1.5rem; color: #374151;">Domestic Transfer (NPP)</h3>
+                    
+                    <div class="form-group">
+                        <label class="form-label">From Account</label>
+                        <select class="form-select" id="fromAccountDomestic">
+                            <option value="1234">Everyday Transaction (••••1234) - $4,287.50</option>
+                            <option value="5678">High Interest Savings (••••5678) - $15,920.00</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Transfer Method</label>
+                        <select class="form-select" id="transferMethod">
+                            <option value="payid">PayID (Email or Phone)</option>
+                            <option value="bsb">BSB and Account Number</option>
+                        </select>
+                    </div>
+
+                    <div id="payidFields">
+                        <div class="form-group">
+                            <label class="form-label">Recipient PayID</label>
+                            <input type="text" class="form-input" id="payId" placeholder="email@example.com or 0412345678">
+                            <div class="form-help">Enter recipient's email address or mobile number registered with PayID</div>
+                        </div>
+                    </div>
+
+                    <div id="bsbFields" style="display: none;">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">BSB</label>
+                                <input type="text" class="form-input" id="bsb" placeholder="123-456" maxlength="7">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Account Number</label>
+                                <input type="text" class="form-input" id="accountNumber" placeholder="123456789">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Account Name</label>
+                            <input type="text" class="form-input" id="accountName" placeholder="Recipient's full name">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Amount (AUD)</label>
+                        <input type="number" class="form-input" id="amountDomestic" placeholder="0.00" step="0.01" min="0.01">
+                        <div class="form-help">Minimum transfer: $0.01 • Maximum: $100,000 per transaction</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Reference</label>
+                        <input type="text" class="form-input" id="referenceDomestic" placeholder="Payment reference" maxlength="280">
+                        <div class="form-help">This will appear on both accounts (optional, max 280 characters)</div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button class="btn btn-cancel" onclick="backToSelection()">Back</button>
+                        <button class="btn btn-submit" onclick="processDomesticTransfer()">Send Transfer</button>
+                    </div>
+                </div>
+
+                <!-- International Payment Form -->
+                <div id="internationalForm" class="form-section">
+                    <h3 style="margin-bottom: 1.5rem; color: #374151;">International Transfer (SWIFT)</h3>
+                    
+                    <div class="form-group">
+                        <label class="form-label">From Account</label>
+                        <select class="form-select" id="fromAccountIntl">
+                            <option value="1234">Everyday Transaction (••••1234) - $4,287.50</option>
+                            <option value="5678">High Interest Savings (••••5678) - $15,920.00</option>
+                        </select>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">Recipient Country</label>
+                            <select class="form-select" id="recipientCountry">
+                                <option value="">Select Country</option>
+                                <option value="US">United States</option>
+                                <option value="UK">United Kingdom</option>
+                                <option value="CA">Canada</option>
+                                <option value="NZ">New Zealand</option>
+                                <option value="SG">Singapore</option>
+                                <option value="JP">Japan</option>
+                                <option value="DE">Germany</option>
+                                <option value="FR">France</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Currency</label>
+                            <select class="form-select" id="currency">
+                                <option value="USD">USD - US Dollar</option>
+                                <option value="GBP">GBP - British Pound</option>
+                                <option value="EUR">EUR - Euro</option>
+                                <option value="CAD">CAD - Canadian Dollar</option>
+                                <option value="NZD">NZD - New Zealand Dollar</option>
+                                <option value="SGD">SGD - Singapore Dollar</option>
+                                <option value="JPY">JPY - Japanese Yen</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Recipient Bank Name</label>
+                        <input type="text" class="form-input" id="bankName" placeholder="Full bank name" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">SWIFT/BIC Code</label>
+                        <input type="text" class="form-input" id="swiftCode" placeholder="e.g. CHASUS33XXX" maxlength="11" required>
+                        <div class="form-help">8-11 character SWIFT code for the recipient bank</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Recipient Bank Address</label>
+                        <textarea class="form-textarea" id="bankAddress" placeholder="Full bank address including city, state/province, postal code, country" required></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Account Number / IBAN</label>
+                        <input type="text" class="form-input" id="intlAccountNumber" placeholder="Account number or IBAN" required>
+                        <div class="form-help">For European banks use IBAN, for US banks use account number</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Account Holder Name</label>
+                        <input type="text" class="form-input" id="holderName" placeholder="Exact name as it appears on the account" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Recipient Address</label>
+                        <textarea class="form-textarea" id="recipientAddress" placeholder="Full address of the account holder" required></textarea>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">Send Amount (AUD)</label>
+                            <input type="number" class="form-input" id="sendAmount" placeholder="0.00" step="0.01" min="1.00">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Transfer Fee</label>
+                            <input type="text" class="form-input" value="$25.00 AUD" readonly>
+                        </div>
+                    </div>
+
+                    <div class="amount-display">
+                        <div class="amount-label">Estimated recipient receives</div>
+                        <div class="amount-value" id="receivedAmount">Calculate amount</div>
+                        <div class="form-help">Exchange rate: 1 AUD = <span id="exchangeRate">Loading...</span> <span id="targetCurrency">USD</span></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Purpose of Payment</label>
+                        <select class="form-select" id="paymentPurpose" required>
+                            <option value="">Select Purpose</option>
+                            <option value="family_support">Family Support</option>
+                            <option value="education">Education Expenses</option>
+                            <option value="business">Business Payment</option>
+                            <option value="property">Property Purchase</option>
+                            <option value="investment">Investment</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Payment Details/Reference</label>
+                        <textarea class="form-textarea" id="paymentDetails" placeholder="Description of the payment purpose and any additional information" maxlength="140"></textarea>
+                        <div class="form-help">This will appear on the recipient's statement (max 140 characters)</div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button class="btn btn-cancel" onclick="backToSelection()">Back</button>
+                        <button class="btn btn-submit" onclick="processInternationalTransfer()">Review Transfer</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script>
         function showAlert(action) {
             alert(`${action} feature would open here in a real banking app`);
         }
+
+        // Payment Modal Functions
+        function openPaymentModal() {
+            document.getElementById('paymentModal').classList.add('show');
+            resetModal();
+        }
+
+        function closePaymentModal() {
+            document.getElementById('paymentModal').classList.remove('show');
+        }
+
+        function resetModal() {
+            // Show payment selection, hide forms
+            document.getElementById('paymentSelection').style.display = 'block';
+            document.getElementById('domesticForm').classList.remove('active');
+            document.getElementById('internationalForm').classList.remove('active');
+            
+            // Remove selection styling
+            document.querySelectorAll('.payment-option').forEach(option => {
+                option.classList.remove('selected');
+            });
+        }
+
+        function selectPaymentType(type) {
+            // Hide payment selection
+            document.getElementById('paymentSelection').style.display = 'none';
+            
+            // Show appropriate form
+            if (type === 'domestic') {
+                document.getElementById('domesticForm').classList.add('active');
+                setupDomesticForm();
+            } else if (type === 'international') {
+                document.getElementById('internationalForm').classList.add('active');
+                setupInternationalForm();
+            }
+        }
+
+        function backToSelection() {
+            resetModal();
+        }
+
+        function setupDomesticForm() {
+            // Handle transfer method change
+            document.getElementById('transferMethod').addEventListener('change', function() {
+                const payidFields = document.getElementById('payidFields');
+                const bsbFields = document.getElementById('bsbFields');
+                
+                if (this.value === 'payid') {
+                    payidFields.style.display = 'block';
+                    bsbFields.style.display = 'none';
+                } else {
+                    payidFields.style.display = 'none';
+                    bsbFields.style.display = 'block';
+                }
+            });
+        }
+
+        function setupInternationalForm() {
+            // Handle currency change
+            document.getElementById('currency').addEventListener('change', updateExchangeRate);
+            document.getElementById('sendAmount').addEventListener('input', calculateReceivedAmount);
+            
+            // Initialize with default exchange rate
+            updateExchangeRate();
+        }
+
+        function updateExchangeRate() {
+            const currency = document.getElementById('currency').value;
+            const exchangeRateSpan = document.getElementById('exchangeRate');
+            const targetCurrencySpan = document.getElementById('targetCurrency');
+            
+            // Mock exchange rates (in real app, these would come from API)
+            const rates = {
+                'USD': 0.67,
+                'GBP': 0.53,
+                'EUR': 0.62,
+                'CAD': 0.91,
+                'NZD': 1.08,
+                'SGD': 0.90,
+                'JPY': 100.45
+            };
+            
+            exchangeRateSpan.textContent = rates[currency] || '0.67';
+            targetCurrencySpan.textContent = currency;
+            calculateReceivedAmount();
+        }
+
+        function calculateReceivedAmount() {
+            const sendAmount = parseFloat(document.getElementById('sendAmount').value) || 0;
+            const fee = 25.00; // Fixed fee
+            const exchangeRate = parseFloat(document.getElementById('exchangeRate').textContent) || 0.67;
+            const currency = document.getElementById('currency').value;
+            
+            if (sendAmount > 0) {
+                const netAmount = Math.max(0, sendAmount - fee);
+                const receivedAmount = netAmount * exchangeRate;
+                document.getElementById('receivedAmount').textContent = 
+                    `${receivedAmount.toFixed(2)} ${currency}`;
+            } else {
+                document.getElementById('receivedAmount').textContent = 'Calculate amount';
+            }
+        }
+
+        function processDomesticTransfer() {
+            const fromAccount = document.getElementById('fromAccountDomestic').value;
+            const method = document.getElementById('transferMethod').value;
+            const amount = document.getElementById('amountDomestic').value;
+            const reference = document.getElementById('referenceDomestic').value;
+            
+            let recipient = '';
+            if (method === 'payid') {
+                recipient = document.getElementById('payId').value;
+            } else {
+                const bsb = document.getElementById('bsb').value;
+                const accNum = document.getElementById('accountNumber').value;
+                const accName = document.getElementById('accountName').value;
+                recipient = `${accName} (${bsb} ${accNum})`;
+            }
+            
+            if (!amount || !recipient) {
+                alert('Please fill in all required fields');
+                return;
+            }
+            
+            alert(`Domestic Transfer Submitted!
+            
+From: Account ••••${fromAccount}
+To: ${recipient}
+Amount: $${parseFloat(amount).toFixed(2)} AUD
+Reference: ${reference || 'No reference'}
+
+This transfer will be processed immediately via the NPP network.`);
+            
+            closePaymentModal();
+        }
+
+        function processInternationalTransfer() {
+            const amount = document.getElementById('sendAmount').value;
+            const currency = document.getElementById('currency').value;
+            const bankName = document.getElementById('bankName').value;
+            const swiftCode = document.getElementById('swiftCode').value;
+            const holderName = document.getElementById('holderName').value;
+            const purpose = document.getElementById('paymentPurpose').value;
+            
+            if (!amount || !bankName || !swiftCode || !holderName || !purpose) {
+                alert('Please fill in all required fields');
+                return;
+            }
+            
+            const netAmount = Math.max(0, parseFloat(amount) - 25);
+            const exchangeRate = parseFloat(document.getElementById('exchangeRate').textContent);
+            const receivedAmount = (netAmount * exchangeRate).toFixed(2);
+            
+            alert(`International Transfer Submitted for Review!
+            
+Send Amount: $${parseFloat(amount).toFixed(2)} AUD
+Transfer Fee: $25.00 AUD
+Recipient Receives: ${receivedAmount} ${currency}
+
+To: ${holderName}
+Bank: ${bankName} (${swiftCode})
+Purpose: ${purpose}
+
+Your transfer will be reviewed and processed within 1-2 business days.
+You will receive email confirmation once sent.`);
+            
+            closePaymentModal();
+        }
+
+        // Close modal when clicking outside
+        document.getElementById('paymentModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closePaymentModal();
+            }
+        });
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && document.getElementById('paymentModal').classList.contains('show')) {
+                closePaymentModal();
+            }
+        });
 
         // Simulate real-time balance updates (less frequent for better UX)
         setInterval(() => {
