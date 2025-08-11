@@ -730,6 +730,275 @@
             font-style: italic;
         }
 
+        /* Accounts Modal Styles */
+        .accounts-modal .modal-content {
+            max-width: 1000px;
+        }
+
+        .accounts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .full-account-card {
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .full-account-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            border-color: #0066cc;
+        }
+
+        .account-category {
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #6b7280;
+            margin-bottom: 0.5rem;
+        }
+
+        .account-name {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 0.75rem;
+        }
+
+        .account-balance-large {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .account-balance-large.positive {
+            color: #16a34a;
+        }
+
+        .account-balance-large.negative {
+            color: #dc2626;
+        }
+
+        .account-balance-large.neutral {
+            color: #1a1a1a;
+        }
+
+        .account-details-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.875rem;
+            color: #6b7280;
+        }
+
+        .account-number-full {
+            font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace;
+        }
+
+        .account-status {
+            display: inline-block;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .status-active {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .status-offset {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .status-loan {
+            background: #fecaca;
+            color: #991b1b;
+        }
+
+        /* Account Detail View */
+        .account-detail-view {
+            display: none;
+        }
+
+        .account-detail-view.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .detail-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .back-button {
+            background: #f3f4f6;
+            border: none;
+            padding: 0.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.2s;
+        }
+
+        .back-button:hover {
+            background: #e5e7eb;
+        }
+
+        .detail-account-info h3 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+        }
+
+        .detail-account-info p {
+            color: #6b7280;
+            font-size: 0.875rem;
+        }
+
+        .detail-balance {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin: 1rem 0;
+        }
+
+        .account-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .feature-card {
+            background: #f9fafb;
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .feature-value {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #1a1a1a;
+        }
+
+        .feature-label {
+            font-size: 0.75rem;
+            color: #6b7280;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-top: 0.25rem;
+        }
+
+        .transaction-history {
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .transaction-history-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid #e5e7eb;
+            background: #f9fafb;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .date-filter {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+        }
+
+        .date-filter select {
+            padding: 0.25rem 0.5rem;
+            border: 1px solid #d1d5db;
+            border-radius: 4px;
+            font-size: 0.875rem;
+        }
+
+        .transaction-list {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .transaction-row {
+            display: flex;
+            align-items: center;
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid #f3f4f6;
+            transition: background-color 0.2s;
+        }
+
+        .transaction-row:hover {
+            background: #f9fafb;
+        }
+
+        .transaction-row:last-child {
+            border-bottom: none;
+        }
+
+        .transaction-icon-large {
+            width: 40px;
+            height: 40px;
+            background: #f3f4f6;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            margin-right: 1rem;
+        }
+
+        .transaction-info {
+            flex: 1;
+        }
+
+        .transaction-description {
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 0.25rem;
+        }
+
+        .transaction-meta {
+            font-size: 0.875rem;
+            color: #6b7280;
+        }
+
+        .transaction-amount-large {
+            font-weight: 700;
+            font-size: 1.1rem;
+            text-align: right;
+        }
+
+        .transaction-amount-large.credit {
+            color: #16a34a;
+        }
+
+        .transaction-amount-large.debit {
+            color: #dc2626;
+        }
+
         @keyframes fadeIn {
             from { opacity: 0; }
             to { opacity: 1; }
@@ -833,7 +1102,7 @@
             <h1>Welcome back, John!</h1>
             <p>Your personalized banking dashboard. Manage your finances with confidence and ease.</p>
             <div class="cta-buttons">
-                <a href="#accounts" class="btn-primary">View Accounts</a>
+                <a href="#accounts" class="btn-primary" onclick="openAccountsModal()">View Accounts</a>
                 <a href="#transfers" class="btn-secondary">Quick Transfer</a>
             </div>
         </div>
@@ -1342,6 +1611,151 @@
         </div>
     </div>
 
+    <!-- Accounts Modal -->
+    <div id="accountsModal" class="modal accounts-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">All Accounts</h2>
+                <button class="close-btn" onclick="closeAccountsModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <!-- Accounts Overview -->
+                <div id="accountsOverview">
+                    <div class="accounts-grid">
+                        <!-- Transaction Accounts -->
+                        <div class="full-account-card" onclick="openAccountDetail('everyday')">
+                            <div class="account-category">Transaction Account</div>
+                            <div class="account-name">Everyday Transaction</div>
+                            <div class="account-balance-large positive">$4,287.50</div>
+                            <div class="account-details-row">
+                                <span class="account-number-full">BSB 062-001 • Acc 12341234</span>
+                                <span class="account-status status-active">Active</span>
+                            </div>
+                        </div>
+
+                        <div class="full-account-card" onclick="openAccountDetail('premium')">
+                            <div class="account-category">Transaction Account</div>
+                            <div class="account-name">Premium Transaction</div>
+                            <div class="account-balance-large positive">$1,856.75</div>
+                            <div class="account-details-row">
+                                <span class="account-number-full">BSB 062-001 • Acc 12349876</span>
+                                <span class="account-status status-active">Active</span>
+                            </div>
+                        </div>
+
+                        <!-- Savings Accounts -->
+                        <div class="full-account-card" onclick="openAccountDetail('savings')">
+                            <div class="account-category">Savings Account</div>
+                            <div class="account-name">High Interest Savings</div>
+                            <div class="account-balance-large positive">$15,920.00</div>
+                            <div class="account-details-row">
+                                <span class="account-number-full">BSB 062-001 • Acc 56785678</span>
+                                <span class="account-status status-active">Active</span>
+                            </div>
+                        </div>
+
+                        <div class="full-account-card" onclick="openAccountDetail('goalSaver')">
+                            <div class="account-category">Savings Account</div>
+                            <div class="account-name">Goal Saver - Holiday Fund</div>
+                            <div class="account-balance-large positive">$8,245.20</div>
+                            <div class="account-details-row">
+                                <span class="account-number-full">BSB 062-001 • Acc 56787654</span>
+                                <span class="account-status status-active">Active</span>
+                            </div>
+                        </div>
+
+                        <div class="full-account-card" onclick="openAccountDetail('termDeposit')">
+                            <div class="account-category">Term Deposit</div>
+                            <div class="account-name">12 Month Term Deposit</div>
+                            <div class="account-balance-large positive">$25,000.00</div>
+                            <div class="account-details-row">
+                                <span class="account-number-full">BSB 062-001 • Acc 78901234</span>
+                                <span class="account-status status-active">Maturing 15/12/2025</span>
+                            </div>
+                        </div>
+
+                        <!-- Home Loan & Offset -->
+                        <div class="full-account-card" onclick="openAccountDetail('homeLoan')">
+                            <div class="account-category">Home Loan</div>
+                            <div class="account-name">Variable Home Loan</div>
+                            <div class="account-balance-large negative">-$285,600.00</div>
+                            <div class="account-details-row">
+                                <span class="account-number-full">Loan 90129012</span>
+                                <span class="account-status status-loan">6.85% p.a.</span>
+                            </div>
+                        </div>
+
+                        <div class="full-account-card" onclick="openAccountDetail('offset')">
+                            <div class="account-category">Offset Account</div>
+                            <div class="account-name">Home Loan Offset</div>
+                            <div class="account-balance-large positive">$52,340.85</div>
+                            <div class="account-details-row">
+                                <span class="account-number-full">BSB 062-001 • Acc 90124567</span>
+                                <span class="account-status status-offset">Offsetting</span>
+                            </div>
+                        </div>
+
+                        <!-- Investment Property Loan -->
+                        <div class="full-account-card" onclick="openAccountDetail('investmentLoan')">
+                            <div class="account-category">Investment Loan</div>
+                            <div class="account-name">Investment Property Loan</div>
+                            <div class="account-balance-large negative">-$425,800.00</div>
+                            <div class="account-details-row">
+                                <span class="account-number-full">Loan 90135678</span>
+                                <span class="account-status status-loan">7.25% p.a.</span>
+                            </div>
+                        </div>
+
+                        <!-- Credit Card -->
+                        <div class="full-account-card" onclick="openAccountDetail('creditCard')">
+                            <div class="account-category">Credit Card</div>
+                            <div class="account-name">Platinum Rewards Card</div>
+                            <div class="account-balance-large negative">-$2,847.95</div>
+                            <div class="account-details-row">
+                                <span class="account-number-full">•••• •••• •••• 1234</span>
+                                <span class="account-status status-active">$15,000 Limit</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Account Detail View -->
+                <div id="accountDetailView" class="account-detail-view">
+                    <div class="detail-header">
+                        <button class="back-button" onclick="backToAccounts()">←</button>
+                        <div class="detail-account-info">
+                            <h3 id="detailAccountName">Account Details</h3>
+                            <p id="detailAccountNumber">Account information</p>
+                        </div>
+                    </div>
+
+                    <div class="detail-balance" id="detailBalance">$0.00</div>
+
+                    <div class="account-features" id="accountFeatures">
+                        <!-- Features will be populated dynamically -->
+                    </div>
+
+                    <div class="transaction-history">
+                        <div class="transaction-history-header">
+                            <h4>Transaction History</h4>
+                            <div class="date-filter">
+                                <label>Period:</label>
+                                <select id="periodFilter" onchange="filterTransactions()">
+                                    <option value="30">Last 30 days</option>
+                                    <option value="90">Last 3 months</option>
+                                    <option value="365">Last 12 months</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="transaction-list" id="transactionList">
+                            <!-- Transactions will be populated dynamically -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script>
         function showAlert(action) {
             alert(`${action} feature would open here in a real banking app`);
@@ -1709,6 +2123,245 @@ PayID payments are instant and available 24/7.`;
             closePayBillsModal();
         }
 
+        // Account Detail Data
+        const accountData = {
+            everyday: {
+                name: "Everyday Transaction",
+                number: "BSB 062-001 • Account 12341234",
+                balance: 4287.50,
+                features: [
+                    { label: "Available Balance", value: "$4,287.50" },
+                    { label: "Monthly Fee", value: "$0.00" },
+                    { label: "Interest Rate", value: "0.05% p.a." },
+                    { label: "ATM Fee Free", value: "Unlimited" }
+                ],
+                transactions: [
+                    { icon: "🛒", description: "Woolworths Supermarket", date: "Today, 2:30 PM", amount: -67.85, category: "Groceries" },
+                    { icon: "☕", description: "Coffee Club - Collins St", date: "Today, 8:15 AM", amount: -8.50, category: "Food & Drink" },
+                    { icon: "⛽", description: "Shell Service Station", date: "Yesterday, 6:45 PM", amount: -85.20, category: "Fuel" },
+                    { icon: "💼", description: "Salary Deposit - TechCorp", date: "Yesterday, 9:00 AM", amount: 2840.00, category: "Income" },
+                    { icon: "🎬", description: "Netflix Monthly", date: "Aug 8, 2025", amount: -19.99, category: "Entertainment" },
+                    { icon: "🚇", description: "Myki Top Up", date: "Aug 6, 2025", amount: -30.00, category: "Transport" },
+                    { icon: "🏪", description: "Coles Supermarket", date: "Aug 5, 2025", amount: -124.75, category: "Groceries" }
+                ]
+            },
+            premium: {
+                name: "Premium Transaction",
+                number: "BSB 062-001 • Account 12349876",
+                balance: 1856.75,
+                features: [
+                    { label: "Available Balance", value: "$1,856.75" },
+                    { label: "Monthly Fee", value: "$15.00" },
+                    { label: "Interest Rate", value: "0.15% p.a." },
+                    { label: "Overseas ATM", value: "No Fees" }
+                ],
+                transactions: [
+                    { icon: "🛫", description: "Jetstar Airways", date: "Aug 7, 2025", amount: -425.00, category: "Travel" },
+                    { icon: "🏨", description: "Booking.com Hotel", date: "Aug 5, 2025", amount: -180.00, category: "Travel" },
+                    { icon: "💳", description: "Transfer from Everyday", date: "Aug 3, 2025", amount: 500.00, category: "Transfer" }
+                ]
+            },
+            savings: {
+                name: "High Interest Savings",
+                number: "BSB 062-001 • Account 56785678",
+                balance: 15920.00,
+                features: [
+                    { label: "Balance", value: "$15,920.00" },
+                    { label: "Interest Rate", value: "4.75% p.a." },
+                    { label: "Monthly Deposits", value: "5 Free" },
+                    { label: "Interest Paid", value: "Monthly" }
+                ],
+                transactions: [
+                    { icon: "💰", description: "Interest Payment", date: "Aug 1, 2025", amount: 62.45, category: "Interest" },
+                    { icon: "💳", description: "Transfer from Everyday", date: "Jul 25, 2025", amount: 1000.00, category: "Transfer" },
+                    { icon: "💰", description: "Interest Payment", date: "Jul 1, 2025", amount: 59.20, category: "Interest" }
+                ]
+            },
+            goalSaver: {
+                name: "Goal Saver - Holiday Fund",
+                number: "BSB 062-001 • Account 56787654",
+                balance: 8245.20,
+                features: [
+                    { label: "Balance", value: "$8,245.20" },
+                    { label: "Goal Amount", value: "$10,000.00" },
+                    { label: "Interest Rate", value: "5.20% p.a." },
+                    { label: "Progress", value: "82.5%" }
+                ],
+                transactions: [
+                    { icon: "🎯", description: "Monthly Goal Deposit", date: "Aug 1, 2025", amount: 400.00, category: "Savings" },
+                    { icon: "💰", description: "Bonus Interest", date: "Aug 1, 2025", amount: 35.75, category: "Interest" },
+                    { icon: "🎯", description: "Monthly Goal Deposit", date: "Jul 1, 2025", amount: 400.00, category: "Savings" }
+                ]
+            },
+            termDeposit: {
+                name: "12 Month Term Deposit",
+                number: "BSB 062-001 • Account 78901234",
+                balance: 25000.00,
+                features: [
+                    { label: "Principal", value: "$25,000.00" },
+                    { label: "Interest Rate", value: "5.10% p.a." },
+                    { label: "Maturity Date", value: "15/12/2025" },
+                    { label: "Est. Interest", value: "$1,275.00" }
+                ],
+                transactions: [
+                    { icon: "🏦", description: "Term Deposit Opened", date: "15/12/2024", amount: -25000.00, category: "Investment" }
+                ]
+            },
+            homeLoan: {
+                name: "Variable Home Loan",
+                number: "Loan Account 90129012",
+                balance: -285600.00,
+                features: [
+                    { label: "Outstanding", value: "$285,600.00" },
+                    { label: "Interest Rate", value: "6.85% p.a." },
+                    { label: "Monthly Repayment", value: "$1,847.32" },
+                    { label: "Offset Benefit", value: "$358.34/month" }
+                ],
+                transactions: [
+                    { icon: "🏠", description: "Monthly Repayment", date: "Aug 1, 2025", amount: 1847.32, category: "Loan Payment" },
+                    { icon: "💰", description: "Interest Charged", date: "Aug 1, 2025", amount: -1632.25, category: "Interest" },
+                    { icon: "🏠", description: "Monthly Repayment", date: "Jul 1, 2025", amount: 1847.32, category: "Loan Payment" }
+                ]
+            },
+            offset: {
+                name: "Home Loan Offset",
+                number: "BSB 062-001 • Account 90124567",
+                balance: 52340.85,
+                features: [
+                    { label: "Balance", value: "$52,340.85" },
+                    { label: "Offsetting", value: "$285,600 Loan" },
+                    { label: "Monthly Saving", value: "$358.34" },
+                    { label: "Interest Rate", value: "0.00% p.a." }
+                ],
+                transactions: [
+                    { icon: "💳", description: "Salary Deposit", date: "Aug 1, 2025", amount: 2840.00, category: "Income" },
+                    { icon: "🏠", description: "Mortgage Repayment", date: "Aug 1, 2025", amount: -1847.32, category: "Transfer" },
+                    { icon: "💳", description: "Transfer from Savings", date: "Jul 25, 2025", amount: 5000.00, category: "Transfer" }
+                ]
+            },
+            investmentLoan: {
+                name: "Investment Property Loan",
+                number: "Loan Account 90135678",
+                balance: -425800.00,
+                features: [
+                    { label: "Outstanding", value: "$425,800.00" },
+                    { label: "Interest Rate", value: "7.25% p.a." },
+                    { label: "Monthly Repayment", value: "$2,856.75" },
+                    { label: "Property Value", value: "$650,000" }
+                ],
+                transactions: [
+                    { icon: "🏢", description: "Monthly Repayment", date: "Aug 1, 2025", amount: 2856.75, category: "Loan Payment" },
+                    { icon: "💰", description: "Interest Charged", date: "Aug 1, 2025", amount: -2571.80, category: "Interest" },
+                    { icon: "🏠", description: "Rental Income", date: "Jul 28, 2025", amount: 2200.00, category: "Income" }
+                ]
+            },
+            creditCard: {
+                name: "Platinum Rewards Card",
+                number: "•••• •••• •••• 1234",
+                balance: -2847.95,
+                features: [
+                    { label: "Balance", value: "$2,847.95" },
+                    { label: "Credit Limit", value: "$15,000.00" },
+                    { label: "Available", value: "$12,152.05" },
+                    { label: "Reward Points", value: "24,580 pts" }
+                ],
+                transactions: [
+                    { icon: "🛒", description: "Amazon Purchase", date: "Today, 3:20 PM", amount: -156.45, category: "Shopping" },
+                    { icon: "🍕", description: "Uber Eats", date: "Yesterday, 7:30 PM", amount: -42.80, category: "Food & Drink" },
+                    { icon: "⛽", description: "BP Service Station", date: "Aug 7, 2025", amount: -78.50, category: "Fuel" },
+                    { icon: "💳", description: "Payment - Thank You", date: "Aug 5, 2025", amount: 1500.00, category: "Payment" }
+                ]
+            }
+        };
+
+        // Account Modal Functions
+        function openAccountsModal() {
+            document.getElementById('accountsModal').classList.add('show');
+            resetAccountsModal();
+        }
+
+        function closeAccountsModal() {
+            document.getElementById('accountsModal').classList.remove('show');
+        }
+
+        function resetAccountsModal() {
+            document.getElementById('accountsOverview').style.display = 'block';
+            document.getElementById('accountDetailView').classList.remove('active');
+        }
+
+        function openAccountDetail(accountType) {
+            const account = accountData[accountType];
+            if (!account) return;
+
+            // Hide overview, show detail
+            document.getElementById('accountsOverview').style.display = 'none';
+            document.getElementById('accountDetailView').classList.add('active');
+
+            // Populate account details
+            document.getElementById('detailAccountName').textContent = account.name;
+            document.getElementById('detailAccountNumber').textContent = account.number;
+            
+            const balanceElement = document.getElementById('detailBalance');
+            const balanceFormatted = Math.abs(account.balance).toLocaleString('en-AU', {
+                style: 'currency',
+                currency: 'AUD'
+            });
+            
+            if (account.balance < 0) {
+                balanceElement.textContent = `-${balanceFormatted}`;
+                balanceElement.className = 'detail-balance negative';
+            } else {
+                balanceElement.textContent = balanceFormatted;
+                balanceElement.className = 'detail-balance positive';
+            }
+
+            // Populate features
+            const featuresContainer = document.getElementById('accountFeatures');
+            featuresContainer.innerHTML = account.features.map(feature => `
+                <div class="feature-card">
+                    <div class="feature-value">${feature.value}</div>
+                    <div class="feature-label">${feature.label}</div>
+                </div>
+            `).join('');
+
+            // Populate transactions
+            populateTransactions(account.transactions);
+        }
+
+        function populateTransactions(transactions) {
+            const transactionList = document.getElementById('transactionList');
+            
+            transactionList.innerHTML = transactions.map(transaction => {
+                const amountClass = transaction.amount >= 0 ? 'credit' : 'debit';
+                const amountFormatted = Math.abs(transaction.amount).toLocaleString('en-AU', {
+                    style: 'currency',
+                    currency: 'AUD'
+                });
+                const displayAmount = transaction.amount >= 0 ? `+${amountFormatted}` : `-${amountFormatted}`;
+                
+                return `
+                    <div class="transaction-row">
+                        <div class="transaction-icon-large">${transaction.icon}</div>
+                        <div class="transaction-info">
+                            <div class="transaction-description">${transaction.description}</div>
+                            <div class="transaction-meta">${transaction.date} • ${transaction.category}</div>
+                        </div>
+                        <div class="transaction-amount-large ${amountClass}">${displayAmount}</div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function backToAccounts() {
+            resetAccountsModal();
+        }
+
+        function filterTransactions() {
+            // In a real app, this would filter the transactions
+            // For demo purposes, we'll just show all transactions
+            console.log('Filtering transactions for period:', document.getElementById('periodFilter').value);
+        }
+
         // Payment Modal Functions
         function openPaymentModal() {
             document.getElementById('paymentModal').classList.add('show');
@@ -1895,12 +2548,22 @@ You will receive email confirmation once sent.`);
             if (e.key === 'Escape' && document.getElementById('payBillsModal').classList.contains('show')) {
                 closePayBillsModal();
             }
+            if (e.key === 'Escape' && document.getElementById('accountsModal').classList.contains('show')) {
+                closeAccountsModal();
+            }
         });
 
         // Close Pay Bills modal when clicking outside
         document.getElementById('payBillsModal').addEventListener('click', function(e) {
             if (e.target === this) {
                 closePayBillsModal();
+            }
+        });
+
+        // Close Accounts modal when clicking outside
+        document.getElementById('accountsModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeAccountsModal();
             }
         });
 
