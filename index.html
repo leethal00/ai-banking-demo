@@ -894,7 +894,7 @@
                     <div class="action-description">Send money domestically or internationally</div>
                 </div>
                 
-                <div class="action-card" onclick="showAlert('Pay Bills')">
+                <div class="action-card" onclick="openPayBillsModal()">
                     <div class="action-icon">🧾</div>
                     <div class="action-title">Pay Bills</div>
                     <div class="action-description">Pay utilities, credit cards, and more</div>
@@ -1227,6 +1227,121 @@
         </div>
     </div>
 
+    <!-- Pay Bills Modal -->
+    <div id="payBillsModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Pay Bills - BPAY</h2>
+                <button class="close-btn" onclick="closePayBillsModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label class="form-label">From Account</label>
+                    <select class="form-select" id="fromAccountBills">
+                        <option value="1234">Everyday Transaction (••••1234) - $4,287.50</option>
+                        <option value="5678">High Interest Savings (••••5678) - $15,920.00</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Payment Method</label>
+                    <select class="form-select" id="paymentMethod" onchange="toggleBpayFields()">
+                        <option value="bpay">BPAY - Australian Bill Payment</option>
+                        <option value="payid">PayID - Direct to Merchant</option>
+                    </select>
+                </div>
+
+                <!-- BPAY Fields -->
+                <div id="bpayFields">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">Biller Code</label>
+                            <input type="text" class="form-input" id="billerCode" placeholder="e.g. 12345" maxlength="10" oninput="lookupBiller()">
+                            <div class="form-help">4-10 digit code found on your bill</div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Reference Number</label>
+                            <input type="text" class="form-input" id="referenceNumber" placeholder="Customer reference number">
+                            <div class="form-help">Your account/customer number with the biller</div>
+                        </div>
+                    </div>
+
+                    <div class="form-group" id="billerInfo" style="display: none;">
+                        <div class="amount-display">
+                            <div class="amount-label">Biller Information</div>
+                            <div class="amount-value" id="billerName" style="font-size: 1.2rem;">-</div>
+                            <div class="form-help" id="billerDetails">Enter biller code to see details</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PayID Fields -->
+                <div id="payidBillFields" style="display: none;">
+                    <div class="form-group">
+                        <label class="form-label">Merchant PayID</label>
+                        <input type="text" class="form-input" id="merchantPayId" placeholder="merchant@company.com.au">
+                        <div class="form-help">PayID registered by the merchant for bill payments</div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Invoice/Reference Number</label>
+                        <input type="text" class="form-input" id="invoiceNumber" placeholder="Invoice or reference number">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Amount (AUD)</label>
+                    <input type="number" class="form-input" id="billAmount" placeholder="0.00" step="0.01" min="0.01">
+                    <div class="form-help">Enter the exact amount shown on your bill</div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Payment Description</label>
+                    <input type="text" class="form-input" id="billDescription" placeholder="e.g. Electricity Bill - March 2025" maxlength="100">
+                    <div class="form-help">Optional description for your records</div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Process Payment</label>
+                    <select class="form-select" id="paymentTiming">
+                        <option value="now">Pay Now</option>
+                        <option value="scheduled">Schedule for Later</option>
+                    </select>
+                </div>
+
+                <div id="scheduleFields" style="display: none;">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">Payment Date</label>
+                            <input type="date" class="form-input" id="paymentDate">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Recurring</label>
+                            <select class="form-select" id="recurring">
+                                <option value="none">One-time Payment</option>
+                                <option value="weekly">Weekly</option>
+                                <option value="fortnightly">Fortnightly</option>
+                                <option value="monthly">Monthly</option>
+                                <option value="quarterly">Quarterly</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="amount-display">
+                    <div class="amount-label">Payment Summary</div>
+                    <div class="amount-value" id="totalBillAmount">$0.00</div>
+                    <div class="form-help">No fees for BPAY payments • Same day processing before 3:00 PM AEST</div>
+                </div>
+
+                <div class="form-actions">
+                    <button class="btn btn-cancel" onclick="closePayBillsModal()">Cancel</button>
+                    <button class="btn btn-submit" onclick="processBillPayment()">Pay Bill</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script>
         function showAlert(action) {
             alert(`${action} feature would open here in a real banking app`);
@@ -1316,6 +1431,53 @@
             { name: "ICICI Bank", swift: "ICICINBBXXX", country: "India", city: "Mumbai" },
         ];
 
+        // Australian BPAY Biller Database
+        const bpayBillers = {
+            // Utilities
+            "12345": { name: "Origin Energy", type: "Electricity", state: "NSW/VIC/SA/QLD" },
+            "23456": { name: "AGL Energy Limited", type: "Gas & Electricity", state: "All States" },
+            "34567": { name: "Energy Australia", type: "Electricity & Gas", state: "NSW/VIC/SA/QLD" },
+            "45678": { name: "Sydney Water Corporation", type: "Water Services", state: "NSW" },
+            "56789": { name: "Melbourne Water", type: "Water & Sewerage", state: "VIC" },
+            "67890": { name: "SA Water", type: "Water Services", state: "SA" },
+            "78901": { name: "Ergon Energy", type: "Electricity", state: "QLD" },
+            "89012": { name: "Western Power", type: "Electricity", state: "WA" },
+            
+            // Telecommunications
+            "11111": { name: "Telstra Corporation", type: "Mobile & Internet", state: "All States" },
+            "22222": { name: "Optus", type: "Mobile & Internet", state: "All States" },
+            "33333": { name: "Vodafone Australia", type: "Mobile Services", state: "All States" },
+            "44444": { name: "TPG Telecom", type: "Internet & Phone", state: "All States" },
+            "55555": { name: "iiNet", type: "Internet Services", state: "All States" },
+            
+            // Credit Cards & Financial
+            "88888": { name: "Commonwealth Bank", type: "Credit Card", state: "All States" },
+            "77777": { name: "Westpac Banking Corporation", type: "Credit Card & Loans", state: "All States" },
+            "66666": { name: "ANZ Bank", type: "Credit Card", state: "All States" },
+            "99999": { name: "National Australia Bank", type: "Credit Card & Personal Loans", state: "All States" },
+            "10101": { name: "American Express Australia", type: "Credit Card", state: "All States" },
+            
+            // Insurance
+            "12121": { name: "NRMA Insurance", type: "Car & Home Insurance", state: "NSW/ACT" },
+            "13131": { name: "RACV", type: "Car & Home Insurance", state: "VIC/TAS" },
+            "14141": { name: "Suncorp Insurance", type: "General Insurance", state: "All States" },
+            "15151": { name: "Allianz Australia", type: "General Insurance", state: "All States" },
+            "16161": { name: "Budget Direct", type: "Car Insurance", state: "All States" },
+            
+            // Government & Councils
+            "20001": { name: "Australian Taxation Office", type: "Tax Payments", state: "All States" },
+            "20002": { name: "City of Sydney Council", type: "Council Rates", state: "NSW" },
+            "20003": { name: "City of Melbourne", type: "Council Rates & Fines", state: "VIC" },
+            "20004": { name: "Brisbane City Council", type: "Council Rates", state: "QLD" },
+            "20005": { name: "City of Adelaide", type: "Council Services", state: "SA" },
+            
+            // Other Services
+            "30001": { name: "Foxtel", type: "Pay TV Services", state: "All States" },
+            "30002": { name: "Kayo Sports", type: "Streaming Services", state: "All States" },
+            "30003": { name: "Stan Entertainment", type: "Streaming Services", state: "All States" },
+            "30004": { name: "Binge", type: "Streaming Services", state: "All States" },
+        };
+
         // Bank Search Functions
         function initializeBankSearch() {
             const searchInput = document.getElementById('bankSearch');
@@ -1403,6 +1565,148 @@
             setTimeout(() => {
                 swiftInput.style.backgroundColor = '';
             }, 2000);
+        }
+
+        // BPAY Functions
+        function openPayBillsModal() {
+            document.getElementById('payBillsModal').classList.add('show');
+            resetBillsModal();
+        }
+
+        function closePayBillsModal() {
+            document.getElementById('payBillsModal').classList.remove('show');
+        }
+
+        function resetBillsModal() {
+            // Reset form fields
+            document.getElementById('billerCode').value = '';
+            document.getElementById('referenceNumber').value = '';
+            document.getElementById('billAmount').value = '';
+            document.getElementById('billDescription').value = '';
+            document.getElementById('totalBillAmount').textContent = '$0.00';
+            
+            // Hide biller info
+            document.getElementById('billerInfo').style.display = 'none';
+            
+            // Set payment timing change handler
+            document.getElementById('paymentTiming').addEventListener('change', function() {
+                const scheduleFields = document.getElementById('scheduleFields');
+                if (this.value === 'scheduled') {
+                    scheduleFields.style.display = 'block';
+                    // Set minimum date to tomorrow
+                    const tomorrow = new Date();
+                    tomorrow.setDate(tomorrow.getDate() + 1);
+                    document.getElementById('paymentDate').min = tomorrow.toISOString().split('T')[0];
+                } else {
+                    scheduleFields.style.display = 'none';
+                }
+            });
+
+            // Set amount change handler
+            document.getElementById('billAmount').addEventListener('input', updateBillTotal);
+        }
+
+        function toggleBpayFields() {
+            const method = document.getElementById('paymentMethod').value;
+            const bpayFields = document.getElementById('bpayFields');
+            const payidFields = document.getElementById('payidBillFields');
+            
+            if (method === 'bpay') {
+                bpayFields.style.display = 'block';
+                payidFields.style.display = 'none';
+            } else {
+                bpayFields.style.display = 'none';
+                payidFields.style.display = 'block';
+            }
+        }
+
+        function lookupBiller() {
+            const billerCode = document.getElementById('billerCode').value.trim();
+            const billerInfo = document.getElementById('billerInfo');
+            const billerName = document.getElementById('billerName');
+            const billerDetails = document.getElementById('billerDetails');
+            
+            if (billerCode.length >= 4) {
+                const biller = bpayBillers[billerCode];
+                if (biller) {
+                    billerName.textContent = biller.name;
+                    billerDetails.textContent = `${biller.type} • ${biller.state}`;
+                    billerInfo.style.display = 'block';
+                    
+                    // Add green highlight to indicate found
+                    document.getElementById('billerCode').style.backgroundColor = '#f0f9ff';
+                    setTimeout(() => {
+                        document.getElementById('billerCode').style.backgroundColor = '';
+                    }, 2000);
+                } else {
+                    billerInfo.style.display = 'none';
+                }
+            } else {
+                billerInfo.style.display = 'none';
+            }
+        }
+
+        function updateBillTotal() {
+            const amount = parseFloat(document.getElementById('billAmount').value) || 0;
+            document.getElementById('totalBillAmount').textContent = `$${amount.toFixed(2)}`;
+        }
+
+        function processBillPayment() {
+            const method = document.getElementById('paymentMethod').value;
+            const amount = document.getElementById('billAmount').value;
+            const fromAccount = document.getElementById('fromAccountBills').value;
+            const timing = document.getElementById('paymentTiming').value;
+            const description = document.getElementById('billDescription').value;
+            
+            let paymentDetails = '';
+            
+            if (method === 'bpay') {
+                const billerCode = document.getElementById('billerCode').value;
+                const referenceNumber = document.getElementById('referenceNumber').value;
+                const biller = bpayBillers[billerCode];
+                
+                if (!billerCode || !referenceNumber || !amount) {
+                    alert('Please fill in all required fields: Biller Code, Reference Number, and Amount');
+                    return;
+                }
+                
+                paymentDetails = `BPAY Payment Processed!
+
+Biller: ${biller ? biller.name : 'Unknown Biller'} (Code: ${billerCode})
+Reference: ${referenceNumber}
+Amount: $${parseFloat(amount).toFixed(2)}
+From Account: ••••${fromAccount}
+${description ? 'Description: ' + description : ''}
+
+${timing === 'now' ? 'Payment processed immediately' : 'Payment scheduled for ' + document.getElementById('paymentDate').value}
+
+BPAY payments are processed same day if submitted before 3:00 PM AEST.
+You will receive SMS confirmation shortly.`;
+                
+            } else { // PayID
+                const merchantPayId = document.getElementById('merchantPayId').value;
+                const invoiceNumber = document.getElementById('invoiceNumber').value;
+                
+                if (!merchantPayId || !amount) {
+                    alert('Please fill in all required fields: Merchant PayID and Amount');
+                    return;
+                }
+                
+                paymentDetails = `PayID Bill Payment Processed!
+
+Merchant PayID: ${merchantPayId}
+${invoiceNumber ? 'Invoice/Reference: ' + invoiceNumber : ''}
+Amount: $${parseFloat(amount).toFixed(2)}
+From Account: ••••${fromAccount}
+${description ? 'Description: ' + description : ''}
+
+${timing === 'now' ? 'Payment processed immediately' : 'Payment scheduled for ' + document.getElementById('paymentDate').value}
+
+PayID payments are instant and available 24/7.`;
+            }
+            
+            alert(paymentDetails);
+            closePayBillsModal();
         }
 
         // Payment Modal Functions
@@ -1587,6 +1891,16 @@ You will receive email confirmation once sent.`);
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape' && document.getElementById('paymentModal').classList.contains('show')) {
                 closePaymentModal();
+            }
+            if (e.key === 'Escape' && document.getElementById('payBillsModal').classList.contains('show')) {
+                closePayBillsModal();
+            }
+        });
+
+        // Close Pay Bills modal when clicking outside
+        document.getElementById('payBillsModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closePayBillsModal();
             }
         });
 
