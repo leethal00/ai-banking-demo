@@ -191,65 +191,115 @@
         /* Account Cards */
         .account-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 1.5rem;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Smaller minimum width */
+            gap: 1rem; /* Smaller gap */
         }
         
         .account-card {
-            background: #ffffff;
-            border: 1px solid #e5e7eb;
-            border-radius: 12px;
+            background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
+            border: 1px solid #e1e8f0;
+            border-radius: 20px;
             padding: 2rem;
-            transition: all 0.3s ease;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 20px rgba(0, 102, 204, 0.08), 0 1px 3px rgba(0, 0, 0, 0.1);
         }
-        
+
+        .account-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #0066cc 0%, #0052a3 50%, #004080 100%);
+            border-radius: 20px 20px 0 0;
+        }
+
         .account-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0, 102, 204, 0.12), 0 8px 32px rgba(0, 0, 0, 0.1);
+            border-color: #cbd5e1;
+        }
+
+        .account-card:hover::before {
+            background: linear-gradient(90deg, #0066cc 0%, #0080ff 50%, #00a3ff 100%);
         }
         
         .account-header {
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
-            margin-bottom: 1rem;
+            margin-bottom: 0.75rem; /* Much smaller margin */
         }
         
         .account-type {
-            font-size: 0.875rem;
-            font-weight: 600;
-            color: #6b7280;
+            font-size: 0.7rem; /* Smaller */
+            font-weight: 700;
+            color: #64748b;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
+            letter-spacing: 0.5px; /* Reduced */
+            background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+            padding: 0.25rem 0.5rem; /* Much smaller padding */
+            border-radius: 12px; /* Smaller radius */
+            border: 1px solid #e2e8f0;
         }
         
         .account-icon {
-            width: 40px;
-            height: 40px;
-            background: #f3f4f6;
-            border-radius: 8px;
+            width: 36px; /* Much smaller */
+            height: 36px;
+            background: linear-gradient(145deg, #0066cc 0%, #0052a3 100%);
+            border-radius: 10px; /* Smaller radius */
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.2rem;
+            font-size: 1rem; /* Smaller icon */
+            color: white;
+            box-shadow: 0 4px 8px rgba(0, 102, 204, 0.25); /* Smaller shadow */
+            position: relative;
+        }
+
+        .account-icon::after {
+            content: '';
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            right: 2px;
+            bottom: 2px;
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.2) 0%, transparent 100%);
+            border-radius: 14px;
         }
         
         .account-balance {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: #1a1a1a;
-            margin-bottom: 0.5rem;
+            font-size: 1.8rem; /* Much smaller */
+            font-weight: 800;
+            color: #0f172a;
+            margin-bottom: 0.5rem; /* Smaller margin */
+            background: linear-gradient(135deg, #0f172a 0%, #334155 100%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1.1;
         }
         
         .account-balance.negative {
-            color: #dc2626;
+            background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
         
         .account-number {
-            font-size: 0.875rem;
-            color: #6b7280;
+            font-size: 0.75rem; /* Smaller */
+            color: #64748b;
             font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace;
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+            padding: 0.25rem 0.5rem; /* Much smaller padding */
+            border-radius: 8px; /* Smaller radius */
+            border: 1px solid #e2e8f0;
+            display: inline-block;
+            font-weight: 600;
         }
         
         /* Quick Actions */
@@ -1331,10 +1381,484 @@
                 flex-direction: column;
             }
         }
+
+        /* Login Screen Styles */
+        .login-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, #0066cc 0%, #004499 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+
+        .login-screen.hidden {
+            display: none;
+        }
+
+        .login-container {
+            background: white;
+            padding: 3rem;
+            border-radius: 16px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        .login-logo {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .login-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 0.5rem;
+        }
+
+        .login-subtitle {
+            color: #6b7280;
+            margin-bottom: 2rem;
+            font-size: 0.95rem;
+        }
+
+        .login-form {
+            text-align: left;
+        }
+
+        .login-form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .login-label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #374151;
+        }
+
+        .login-input {
+            width: 100%;
+            padding: 0.875rem;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.2s;
+        }
+
+        .login-input:focus {
+            outline: none;
+            border-color: #0066cc;
+        }
+
+        .login-btn {
+            width: 100%;
+            background: #0066cc;
+            color: white;
+            border: none;
+            padding: 1rem;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            margin-top: 1rem;
+        }
+
+        .login-btn:hover {
+            background: #0052a3;
+        }
+
+        .login-help {
+            margin-top: 1.5rem;
+            font-size: 0.875rem;
+            color: #6b7280;
+            text-align: center;
+        }
+
+        /* Main app container */
+        .main-app {
+            display: none;
+        }
+
+        .main-app.show {
+            display: block;
+        }
+
+        /* More compact styles for main interface */
+        .hero {
+            padding: 1rem 0; /* Much smaller blue banner */
+        }
+
+        .hero h1 {
+            font-size: 1.75rem; /* Much smaller title */
+            margin-bottom: 0.25rem; /* Tighter spacing */
+        }
+
+        .hero p {
+            font-size: 0.9rem; /* Smaller subtitle */
+            margin-bottom: 0.75rem; /* Much tighter */
+        }
+
+        .main-content {
+            padding: 2rem 0; /* Reduced from 4rem */
+        }
+
+        .account-grid {
+            gap: 0.75rem; /* Tighter grid */
+        }
+
+        .account-card {
+            padding: 1rem; /* Much smaller cards */
+        }
+
+        /* Account Type Specific Styles */
+        .account-card[data-type="transaction"] .account-icon {
+            background: linear-gradient(145deg, #059669 0%, #047857 100%);
+            box-shadow: 0 8px 16px rgba(5, 150, 105, 0.25);
+        }
+
+        .account-card[data-type="transaction"]::before {
+            background: linear-gradient(90deg, #059669 0%, #047857 50%, #065f46 100%);
+        }
+
+        .account-card[data-type="savings"] .account-icon {
+            background: linear-gradient(145deg, #7c3aed 0%, #6d28d9 100%);
+            box-shadow: 0 8px 16px rgba(124, 58, 237, 0.25);
+        }
+
+        .account-card[data-type="savings"]::before {
+            background: linear-gradient(90deg, #7c3aed 0%, #6d28d9 50%, #5b21b6 100%);
+        }
+
+        .account-card[data-type="loan"] .account-icon {
+            background: linear-gradient(145deg, #dc2626 0%, #b91c1c 100%);
+            box-shadow: 0 8px 16px rgba(220, 38, 38, 0.25);
+        }
+
+        .account-card[data-type="loan"]::before {
+            background: linear-gradient(90deg, #dc2626 0%, #b91c1c 50%, #991b1b 100%);
+        }
+
+        .account-card[data-type="credit"] .account-icon {
+            background: linear-gradient(145deg, #ea580c 0%, #dc2626 100%);
+            box-shadow: 0 8px 16px rgba(234, 88, 12, 0.25);
+        }
+
+        .account-card[data-type="credit"]::before {
+            background: linear-gradient(90deg, #ea580c 0%, #dc2626 50%, #b91c1c 100%);
+        }
+
+        /* Add subtle animation to balance numbers */
+        @keyframes balanceGlow {
+            0%, 100% { filter: drop-shadow(0 0 4px rgba(0, 102, 204, 0.2)); }
+            50% { filter: drop-shadow(0 0 8px rgba(0, 102, 204, 0.3)); }
+        }
+
+        .account-balance {
+            animation: balanceGlow 3s ease-in-out infinite;
+        }
+
+        .quick-actions {
+            padding: 1.5rem 0; /* Even smaller */
+        }
+
+        .actions-grid {
+            gap: 0.75rem; /* Tighter */
+        }
+
+        .action-card {
+            padding: 0.75rem; /* Much smaller */
+        }
+
+        .section-title {
+            font-size: 1.5rem; /* Much smaller */
+            margin-bottom: 1rem; /* Tighter */
+        }
+
+        .transactions-section {
+            padding: 1.5rem 0; /* Smaller */
+        }
+
+        .transaction {
+            padding: 0.75rem; /* Much smaller */
+        }
+
+        .section {
+            margin-bottom: 1.5rem; /* Reduce space between sections */
+        }
+
+        /* Statements Modal Styles */
+        .statements-modal .modal-content {
+            max-width: 900px;
+        }
+
+        .statements-filter {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr auto;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            align-items: end;
+        }
+
+        .statement-list {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .statement-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+            transition: background-color 0.2s;
+        }
+
+        .statement-item:hover {
+            background-color: #f9fafb;
+        }
+
+        .statement-info {
+            flex: 1;
+        }
+
+        .statement-period {
+            font-weight: 600;
+            color: #1a1a1a;
+        }
+
+        .statement-details {
+            font-size: 0.875rem;
+            color: #6b7280;
+            margin-top: 0.25rem;
+        }
+
+        .statement-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .btn-icon {
+            padding: 0.5rem;
+            background: #f3f4f6;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-icon:hover {
+            background: #0066cc;
+            color: white;
+            border-color: #0066cc;
+        }
+
+        /* Credit Application Modal Styles */
+        .credit-modal .modal-content {
+            max-width: 700px;
+        }
+
+        .application-steps {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 2rem;
+        }
+
+        .step {
+            display: flex;
+            align-items: center;
+            padding: 0.5rem 1rem;
+            background: #f3f4f6;
+            border-radius: 20px;
+            margin: 0 0.25rem;
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: #6b7280;
+        }
+
+        .step.active {
+            background: #0066cc;
+            color: white;
+        }
+
+        .step.completed {
+            background: #059669;
+            color: white;
+        }
+
+        .credit-check-result {
+            text-align: center;
+            padding: 2rem;
+            border-radius: 12px;
+            margin: 2rem 0;
+        }
+
+        .credit-check-result.approved {
+            background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
+            border: 2px solid #10b981;
+        }
+
+        .credit-check-result.declined {
+            background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
+            border: 2px solid #ef4444;
+        }
+
+        .result-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .result-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .result-details {
+            font-size: 0.95rem;
+            color: #374151;
+        }
+
+        /* ATM Finder Modal Styles */
+        .atm-modal .modal-content {
+            max-width: 1000px;
+        }
+
+        .atm-search {
+            display: grid;
+            grid-template-columns: 1fr 1fr auto;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .atm-filters {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-chip {
+            padding: 0.5rem 1rem;
+            background: #f3f4f6;
+            border: 1px solid #d1d5db;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .filter-chip.active {
+            background: #0066cc;
+            color: white;
+            border-color: #0066cc;
+        }
+
+        .atm-list {
+            max-height: 500px;
+            overflow-y: auto;
+        }
+
+        .atm-item {
+            display: flex;
+            align-items: flex-start;
+            padding: 1rem;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            margin-bottom: 0.75rem;
+        }
+
+        .atm-icon {
+            width: 40px;
+            height: 40px;
+            background: #0066cc;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+            margin-right: 1rem;
+        }
+
+        .atm-info {
+            flex: 1;
+        }
+
+        .atm-name {
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 0.25rem;
+        }
+
+        .atm-address {
+            color: #6b7280;
+            font-size: 0.875rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .atm-features {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .feature-tag {
+            padding: 0.25rem 0.5rem;
+            background: #e0f2fe;
+            color: #0369a1;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .atm-distance {
+            font-weight: 600;
+            color: #0066cc;
+        }
     </style>
 </head>
 <body>
-    <header class="header">
+    <!-- Login Screen -->
+    <div id="loginScreen" class="login-screen">
+        <div class="login-container">
+            <div class="login-logo">🏦</div>
+            <h1 class="login-title">SecureBank</h1>
+            <p class="login-subtitle">Your Digital Banking Partner</p>
+            
+            <form class="login-form" onsubmit="handleLogin(event)">
+                <div class="login-form-group">
+                    <label class="login-label" for="username">Customer ID or Username</label>
+                    <input type="text" id="username" class="login-input" placeholder="Enter your Customer ID" required>
+                </div>
+                
+                <div class="login-form-group">
+                    <label class="login-label" for="password">Password</label>
+                    <input type="password" id="password" class="login-input" placeholder="Enter your password" required>
+                </div>
+                
+                <button type="submit" class="login-btn">Sign In Securely</button>
+            </form>
+            
+            <div class="login-help">
+                <strong>Demo Mode:</strong> Enter any credentials to access the banking demo.<br>
+                Try: <strong>demo</strong> / <strong>password</strong>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Banking Application -->
+    <div id="mainApp" class="main-app">
+        <header class="header">
         <div class="header-content">
             <div class="logo">
                 🏦 SecureBank
@@ -1344,7 +1868,7 @@
                 <a href="#transfers" onclick="openTransfersModal()">Transfers</a>
                 <a href="#payments" onclick="openPaymentModal()">Payments</a>
                 <a href="#support" onclick="openSupportModal()">Support</a>
-                <a href="#login" class="login-btn">Sign In</a>
+                <a href="#logout" class="login-btn" onclick="logout()">Sign Out</a>
             </nav>
         </div>
     </header>
@@ -1368,33 +1892,33 @@
             </div>
             
             <div class="account-grid">
-                <div class="account-card">
+                <div class="account-card" data-type="transaction">
                     <div class="account-header">
                         <div>
                             <div class="account-type">Everyday Transaction</div>
-                            <div class="account-number">••••1234</div>
+                            <div class="account-number">BSB 062-001 • ••••1234</div>
                         </div>
                         <div class="account-icon">💳</div>
                     </div>
                     <div class="account-balance">$4,287.50</div>
                 </div>
                 
-                <div class="account-card">
+                <div class="account-card" data-type="savings">
                     <div class="account-header">
                         <div>
                             <div class="account-type">High Interest Savings</div>
-                            <div class="account-number">••••5678</div>
+                            <div class="account-number">BSB 062-001 • ••••5678</div>
                         </div>
                         <div class="account-icon">💰</div>
                     </div>
                     <div class="account-balance">$15,920.00</div>
                 </div>
                 
-                <div class="account-card">
+                <div class="account-card" data-type="loan">
                     <div class="account-header">
                         <div>
                             <div class="account-type">Home Loan</div>
-                            <div class="account-number">••••9012</div>
+                            <div class="account-number">BSB 062-001 • ••••9012</div>
                         </div>
                         <div class="account-icon">🏠</div>
                     </div>
@@ -1421,25 +1945,25 @@
                     <div class="action-description">Pay utilities, credit cards, and more</div>
                 </div>
                 
-                <div class="action-card" onclick="showAlert('View Statements')">
+                <div class="action-card" onclick="openStatementsModal()">
                     <div class="action-icon">📊</div>
                     <div class="action-title">View Statements</div>
                     <div class="action-description">Download your monthly statements</div>
                 </div>
                 
-                <div class="action-card" onclick="showAlert('Apply for Credit')">
+                <div class="action-card" onclick="openCreditApplicationModal()">
                     <div class="action-icon">💳</div>
                     <div class="action-title">Apply for Credit</div>
                     <div class="action-description">Get pre-approved for loans and cards</div>
                 </div>
                 
-                <div class="action-card" onclick="showAlert('Find ATM')">
+                <div class="action-card" onclick="openATMFinderModal()">
                     <div class="action-icon">🏧</div>
                     <div class="action-title">Find ATM</div>
                     <div class="action-description">Locate nearby ATMs and branches</div>
                 </div>
                 
-                <div class="action-card" onclick="showAlert('Contact Support')">
+                <div class="action-card" onclick="openSupportModal()">
                     <div class="action-icon">💬</div>
                     <div class="action-title">Contact Support</div>
                     <div class="action-description">24/7 customer service support</div>
@@ -2186,6 +2710,190 @@
                         <span class="question-chip" onclick="askSuggestedQuestion('How do I increase my credit limit?')">Credit limit</span>
                         <span class="question-chip" onclick="askSuggestedQuestion('What is an offset account?')">Offset accounts</span>
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Statements Modal -->
+    <div id="statementsModal" class="modal statements-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Account Statements</h2>
+                <button class="close-btn" onclick="closeStatementsModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="statements-filter">
+                    <div class="form-group">
+                        <label class="form-label">Account</label>
+                        <select class="form-select" id="statementAccount">
+                            <option value="all">All Accounts</option>
+                            <option value="everyday">Everyday Transaction</option>
+                            <option value="savings">High Interest Savings</option>
+                            <option value="homeLoan">Home Loan</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">From Date</label>
+                        <input type="date" class="form-input" id="statementFromDate">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">To Date</label>
+                        <input type="date" class="form-input" id="statementToDate">
+                    </div>
+                    <button class="btn btn-primary" onclick="filterStatements()">Filter</button>
+                </div>
+
+                <div class="statement-list" id="statementList">
+                    <!-- Statement items will be populated here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Credit Application Modal -->
+    <div id="creditApplicationModal" class="modal credit-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Credit Card Application</h2>
+                <button class="close-btn" onclick="closeCreditApplicationModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="application-steps">
+                    <div class="step active" id="step1">1. Personal Info</div>
+                    <div class="step" id="step2">2. Income Details</div>
+                    <div class="step" id="step3">3. Credit Check</div>
+                    <div class="step" id="step4">4. Result</div>
+                </div>
+
+                <div id="creditStep1" class="credit-step">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">First Name</label>
+                            <input type="text" class="form-input" id="creditFirstName" value="">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Last Name</label>
+                            <input type="text" class="form-input" id="creditLastName" value="">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">Date of Birth</label>
+                            <input type="date" class="form-input" id="creditDOB">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Phone Number</label>
+                            <input type="tel" class="form-input" id="creditPhone" value="">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Residential Address</label>
+                        <input type="text" class="form-input" id="creditAddress" placeholder="Street address, suburb, state, postcode">
+                    </div>
+                </div>
+
+                <div id="creditStep2" class="credit-step" style="display: none;">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">Employment Status</label>
+                            <select class="form-select" id="creditEmployment">
+                                <option value="">Select employment status</option>
+                                <option value="full-time">Full-time employed</option>
+                                <option value="part-time">Part-time employed</option>
+                                <option value="self-employed">Self-employed</option>
+                                <option value="casual">Casual worker</option>
+                                <option value="retired">Retired</option>
+                                <option value="student">Student</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Annual Income (AUD)</label>
+                            <input type="number" class="form-input" id="creditIncome" placeholder="e.g., 75000">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Employer Name</label>
+                        <input type="text" class="form-input" id="creditEmployer" placeholder="Company name">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Requested Credit Limit (AUD)</label>
+                        <select class="form-select" id="creditLimit">
+                            <option value="2000">$2,000</option>
+                            <option value="5000">$5,000</option>
+                            <option value="10000">$10,000</option>
+                            <option value="15000">$15,000</option>
+                            <option value="25000">$25,000</option>
+                            <option value="50000">$50,000</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div id="creditStep3" class="credit-step" style="display: none;">
+                    <div class="credit-check-info">
+                        <h3>Credit Check Authorization</h3>
+                        <p>SecureBank will perform a credit check with credit reporting agencies. This may appear on your credit report.</p>
+                        <div style="margin: 1.5rem 0;">
+                            <label style="display: flex; align-items: center; gap: 0.5rem;">
+                                <input type="checkbox" id="creditCheckConsent" required>
+                                I authorize SecureBank to perform a credit check
+                            </label>
+                        </div>
+                        <button class="btn btn-primary" onclick="performCreditCheck()" style="width: 100%;">
+                            Run Credit Check
+                        </button>
+                    </div>
+                </div>
+
+                <div id="creditStep4" class="credit-step" style="display: none;">
+                    <div id="creditResult">
+                        <!-- Result will be populated here -->
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <button class="btn btn-cancel" onclick="closeCreditApplicationModal()">Cancel</button>
+                    <button class="btn btn-primary" onclick="nextCreditStep()" id="creditNextBtn">Next</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ATM Finder Modal -->
+    <div id="atmFinderModal" class="modal atm-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Find ATMs & Branches</h2>
+                <button class="close-btn" onclick="closeATMFinderModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="atm-search">
+                    <div class="form-group">
+                        <label class="form-label">Search Location</label>
+                        <input type="text" class="form-input" id="atmLocation" placeholder="Enter suburb, postcode, or address">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Search Radius</label>
+                        <select class="form-select" id="atmRadius">
+                            <option value="5">5 km</option>
+                            <option value="10">10 km</option>
+                            <option value="20">20 km</option>
+                            <option value="50">50 km</option>
+                        </select>
+                    </div>
+                    <button class="btn btn-primary" onclick="searchATMs()">Search</button>
+                </div>
+
+                <div class="atm-filters">
+                    <div class="filter-chip active" data-filter="all">All</div>
+                    <div class="filter-chip" data-filter="24hour">24 Hour</div>
+                    <div class="filter-chip" data-filter="deposit">Cash Deposit</div>
+                    <div class="filter-chip" data-filter="wheelchair">Wheelchair Access</div>
+                    <div class="filter-chip" data-filter="branch">Full Branch</div>
+                </div>
+
+                <div class="atm-list" id="atmList">
+                    <!-- ATM results will be populated here -->
                 </div>
             </div>
         </div>
@@ -3365,6 +4073,500 @@ Your new balance is $${(fromAccountData.balance - amount).toFixed(2).replace(/\B
                 el.textContent = `$${newBalance.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',')}`;
             });
         }, 60000); // Update every minute
+
+        // Login functionality
+        let currentUser = null;
+
+        function handleLogin(event) {
+            event.preventDefault();
+            
+            const username = document.getElementById('username').value.trim();
+            const password = document.getElementById('password').value.trim();
+            
+            if (username && password) {
+                // Store user credentials temporarily (in real app, this would be secure authentication)
+                currentUser = {
+                    username: username,
+                    loginTime: new Date(),
+                    sessionId: Math.random().toString(36).substring(2, 15)
+                };
+                
+                // Store in localStorage for session persistence
+                localStorage.setItem('securebank_session', JSON.stringify(currentUser));
+                
+                // Hide login screen and show main app
+                document.getElementById('loginScreen').classList.add('hidden');
+                document.getElementById('mainApp').classList.add('show');
+                
+                // Update welcome message with actual username
+                updateWelcomeMessage();
+                
+                // Optional: Show success message
+                setTimeout(() => {
+                    showLoginSuccess();
+                }, 500);
+            }
+        }
+
+        function updateWelcomeMessage() {
+            const welcomeElements = document.querySelectorAll('.hero h1');
+            if (welcomeElements.length > 0 && currentUser) {
+                // Get current time for greeting
+                const hour = new Date().getHours();
+                let greeting = 'Good evening';
+                if (hour >= 6 && hour < 12) greeting = 'Good morning';
+                else if (hour >= 12 && hour < 18) greeting = 'Good afternoon';
+                
+                welcomeElements[0].innerHTML = `${greeting}, ${currentUser.username}!`;
+            }
+        }
+
+        function showLoginSuccess() {
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: #059669;
+                color: white;
+                padding: 1rem 1.5rem;
+                border-radius: 8px;
+                z-index: 1001;
+                font-weight: 600;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+                transform: translateX(100%);
+                transition: transform 0.3s ease;
+            `;
+            notification.textContent = '✅ Login successful! Welcome to SecureBank';
+            document.body.appendChild(notification);
+            
+            // Animate in
+            setTimeout(() => {
+                notification.style.transform = 'translateX(0)';
+            }, 100);
+            
+            // Remove after 3 seconds
+            setTimeout(() => {
+                notification.style.transform = 'translateX(100%)';
+                setTimeout(() => {
+                    document.body.removeChild(notification);
+                }, 300);
+            }, 3000);
+        }
+
+        function logout() {
+            // Clear session
+            currentUser = null;
+            localStorage.removeItem('securebank_session');
+            
+            // Show login screen and hide main app
+            document.getElementById('mainApp').classList.remove('show');
+            document.getElementById('loginScreen').classList.remove('hidden');
+            
+            // Reset form
+            document.getElementById('username').value = '';
+            document.getElementById('password').value = '';
+        }
+
+        // Check for existing session on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedSession = localStorage.getItem('securebank_session');
+            if (savedSession) {
+                try {
+                    currentUser = JSON.parse(savedSession);
+                    // Check if session is less than 24 hours old
+                    const sessionAge = Date.now() - new Date(currentUser.loginTime).getTime();
+                    if (sessionAge < 24 * 60 * 60 * 1000) { // 24 hours
+                        // Valid session, show main app
+                        document.getElementById('loginScreen').classList.add('hidden');
+                        document.getElementById('mainApp').classList.add('show');
+                        updateWelcomeMessage();
+                    } else {
+                        // Session expired
+                        logout();
+                    }
+                } catch (e) {
+                    // Invalid session data
+                    logout();
+                }
+            }
+        });
+
+        // Statements Modal Functions
+        function openStatementsModal() {
+            document.getElementById('statementsModal').classList.add('show');
+            initializeStatements();
+            generateStatements();
+        }
+
+        function closeStatementsModal() {
+            document.getElementById('statementsModal').classList.remove('show');
+        }
+
+        function initializeStatements() {
+            const today = new Date();
+            const threeMonthsAgo = new Date(today.setMonth(today.getMonth() - 3));
+            
+            document.getElementById('statementFromDate').value = threeMonthsAgo.toISOString().split('T')[0];
+            document.getElementById('statementToDate').value = new Date().toISOString().split('T')[0];
+        }
+
+        function generateStatements() {
+            const statements = [
+                { period: 'November 2024', account: 'Everyday Transaction', transactions: 47, balance: 4287.50, date: '2024-11-30' },
+                { period: 'October 2024', account: 'Everyday Transaction', transactions: 52, balance: 3942.15, date: '2024-10-31' },
+                { period: 'September 2024', account: 'Everyday Transaction', transactions: 39, balance: 4156.80, date: '2024-09-30' },
+                { period: 'November 2024', account: 'High Interest Savings', transactions: 3, balance: 15920.00, date: '2024-11-30' },
+                { period: 'October 2024', account: 'High Interest Savings', transactions: 2, balance: 15654.32, date: '2024-10-31' },
+                { period: 'September 2024', account: 'High Interest Savings', transactions: 4, balance: 15234.87, date: '2024-09-30' },
+                { period: 'November 2024', account: 'Home Loan', transactions: 1, balance: -285600.00, date: '2024-11-30' },
+                { period: 'October 2024', account: 'Home Loan', transactions: 1, balance: -286456.00, date: '2024-10-31' },
+                { period: 'September 2024', account: 'Home Loan', transactions: 1, balance: -287312.00, date: '2024-09-30' }
+            ];
+
+            displayStatements(statements);
+        }
+
+        function displayStatements(statements) {
+            const container = document.getElementById('statementList');
+            container.innerHTML = '';
+
+            statements.forEach(statement => {
+                const statementItem = document.createElement('div');
+                statementItem.className = 'statement-item';
+                statementItem.innerHTML = `
+                    <div class="statement-info">
+                        <div class="statement-period">${statement.period} - ${statement.account}</div>
+                        <div class="statement-details">${statement.transactions} transactions • Closing balance: $${Math.abs(statement.balance).toFixed(2).replace(/\\B(?=(\\d{3})+(?!\\d))/g, ',')}</div>
+                    </div>
+                    <div class="statement-actions">
+                        <button class="btn-icon" onclick="viewStatement('${statement.account}', '${statement.period}')" title="View">👁️</button>
+                        <button class="btn-icon" onclick="downloadStatement('${statement.account}', '${statement.period}')" title="Download PDF">📄</button>
+                        <button class="btn-icon" onclick="emailStatement('${statement.account}', '${statement.period}')" title="Email">📧</button>
+                    </div>
+                `;
+                container.appendChild(statementItem);
+            });
+        }
+
+        function filterStatements() {
+            const account = document.getElementById('statementAccount').value;
+            const fromDate = document.getElementById('statementFromDate').value;
+            const toDate = document.getElementById('statementToDate').value;
+            
+            alert(`Filtering statements for ${account === 'all' ? 'all accounts' : account} from ${fromDate} to ${toDate}`);
+            generateStatements(); // In a real app, this would filter the results
+        }
+
+        function viewStatement(account, period) {
+            alert(`Opening ${period} statement for ${account}...\\n\\nThis would display the full statement with all transactions, fees, and account summary.`);
+        }
+
+        function downloadStatement(account, period) {
+            alert(`Downloading ${period} statement for ${account}...\\n\\nPDF download would start now. File: Statement_${account.replace(/\\s+/g, '_')}_${period.replace(' ', '_')}.pdf`);
+        }
+
+        function emailStatement(account, period) {
+            alert(`Emailing ${period} statement for ${account} to your registered email address...\\n\\nStatement sent successfully!`);
+        }
+
+        // Credit Application Functions
+        let creditStep = 1;
+
+        function openCreditApplicationModal() {
+            document.getElementById('creditApplicationModal').classList.add('show');
+            resetCreditApplication();
+            prefillCreditApplication();
+        }
+
+        function closeCreditApplicationModal() {
+            document.getElementById('creditApplicationModal').classList.remove('show');
+            resetCreditApplication();
+        }
+
+        function resetCreditApplication() {
+            creditStep = 1;
+            updateCreditSteps();
+            document.getElementById('creditNextBtn').textContent = 'Next';
+            document.getElementById('creditNextBtn').style.display = 'block';
+        }
+
+        function prefillCreditApplication() {
+            if (currentUser) {
+                // Pre-fill with user data (simulated)
+                document.getElementById('creditFirstName').value = currentUser.username;
+                document.getElementById('creditLastName').value = 'Customer';
+                document.getElementById('creditPhone').value = '+61 400 123 456';
+            }
+        }
+
+        function updateCreditSteps() {
+            for (let i = 1; i <= 4; i++) {
+                const step = document.getElementById(`step${i}`);
+                const stepDiv = document.getElementById(`creditStep${i}`);
+                
+                if (i < creditStep) {
+                    step.className = 'step completed';
+                } else if (i === creditStep) {
+                    step.className = 'step active';
+                } else {
+                    step.className = 'step';
+                }
+
+                if (stepDiv) {
+                    stepDiv.style.display = i === creditStep ? 'block' : 'none';
+                }
+            }
+        }
+
+        function nextCreditStep() {
+            if (creditStep === 1) {
+                // Validate personal info
+                const firstName = document.getElementById('creditFirstName').value;
+                const lastName = document.getElementById('creditLastName').value;
+                const dob = document.getElementById('creditDOB').value;
+                const phone = document.getElementById('creditPhone').value;
+                
+                if (!firstName || !lastName || !dob || !phone) {
+                    alert('Please fill in all required fields');
+                    return;
+                }
+                
+                creditStep = 2;
+                updateCreditSteps();
+                
+            } else if (creditStep === 2) {
+                // Validate income info
+                const employment = document.getElementById('creditEmployment').value;
+                const income = document.getElementById('creditIncome').value;
+                const employer = document.getElementById('creditEmployer').value;
+                
+                if (!employment || !income || !employer) {
+                    alert('Please fill in all required fields');
+                    return;
+                }
+                
+                if (parseInt(income) < 30000) {
+                    alert('Minimum income requirement is $30,000 per year');
+                    return;
+                }
+                
+                creditStep = 3;
+                updateCreditSteps();
+                document.getElementById('creditNextBtn').style.display = 'none';
+            }
+        }
+
+        function performCreditCheck() {
+            const consent = document.getElementById('creditCheckConsent').checked;
+            if (!consent) {
+                alert('Please provide consent for credit check');
+                return;
+            }
+
+            // Show loading
+            document.getElementById('creditStep3').innerHTML = `
+                <div style="text-align: center; padding: 2rem;">
+                    <div style="font-size: 2rem; margin-bottom: 1rem;">🔄</div>
+                    <h3>Running Credit Check...</h3>
+                    <p>Please wait while we verify your credit history</p>
+                </div>
+            `;
+
+            // Simulate credit check with random result
+            setTimeout(() => {
+                const approved = Math.random() > 0.3; // 70% approval rate
+                creditStep = 4;
+                updateCreditSteps();
+                showCreditResult(approved);
+            }, 3000);
+        }
+
+        function showCreditResult(approved) {
+            const income = parseInt(document.getElementById('creditIncome').value);
+            const requestedLimit = parseInt(document.getElementById('creditLimit').value);
+            
+            let approvedLimit = 0;
+            let interestRate = '20.99%';
+            
+            if (approved) {
+                // Calculate approved limit based on income
+                const maxLimit = Math.floor(income * 0.3); // 30% of income
+                approvedLimit = Math.min(requestedLimit, maxLimit);
+                
+                if (income > 100000) interestRate = '16.99%';
+                else if (income > 75000) interestRate = '18.99%';
+            }
+
+            const resultContainer = document.getElementById('creditResult');
+            
+            if (approved) {
+                resultContainer.innerHTML = `
+                    <div class="credit-check-result approved">
+                        <div class="result-icon">✅</div>
+                        <div class="result-title">Congratulations! Application Approved</div>
+                        <div class="result-details">
+                            <p><strong>Approved Credit Limit:</strong> $${approvedLimit.toLocaleString()}</p>
+                            <p><strong>Interest Rate:</strong> ${interestRate} p.a.</p>
+                            <p><strong>Annual Fee:</strong> $0 (first year waived)</p>
+                            <p style="margin-top: 1rem;">Your SecureBank Platinum Card will arrive within 7-10 business days.</p>
+                        </div>
+                        <button class="btn btn-primary" onclick="acceptCreditOffer()" style="margin-top: 1rem;">Accept Offer</button>
+                    </div>
+                `;
+            } else {
+                resultContainer.innerHTML = `
+                    <div class="credit-check-result declined">
+                        <div class="result-icon">❌</div>
+                        <div class="result-title">Application Not Approved</div>
+                        <div class="result-details">
+                            <p>Unfortunately, we cannot approve your credit card application at this time.</p>
+                            <p style="margin-top: 1rem;"><strong>You can:</strong></p>
+                            <ul style="text-align: left; margin-top: 0.5rem;">
+                                <li>Try again in 3 months</li>
+                                <li>Apply for a lower credit limit</li>
+                                <li>Contact us to discuss other options</li>
+                            </ul>
+                        </div>
+                    </div>
+                `;
+            }
+
+            document.getElementById('creditNextBtn').style.display = 'none';
+        }
+
+        function acceptCreditOffer() {
+            alert('Congratulations! Your credit card application has been accepted.\\n\\nYour new SecureBank Platinum Card will be activated and sent to your registered address within 7-10 business days.\\n\\nWelcome to SecureBank Premium Banking!');
+            closeCreditApplicationModal();
+        }
+
+        // ATM Finder Functions
+        function openATMFinderModal() {
+            document.getElementById('atmFinderModal').classList.add('show');
+            setupATMFilters();
+            loadDefaultATMs();
+        }
+
+        function closeATMFinderModal() {
+            document.getElementById('atmFinderModal').classList.remove('show');
+        }
+
+        function setupATMFilters() {
+            const filters = document.querySelectorAll('.filter-chip');
+            filters.forEach(filter => {
+                filter.addEventListener('click', function() {
+                    filters.forEach(f => f.classList.remove('active'));
+                    this.classList.add('active');
+                    filterATMs(this.dataset.filter);
+                });
+            });
+        }
+
+        function loadDefaultATMs() {
+            const atmData = [
+                { name: 'SecureBank Sydney CBD', address: '123 Martin Place, Sydney NSW 2000', distance: '0.2 km', features: ['24hour', 'deposit', 'wheelchair', 'branch'], type: 'branch' },
+                { name: 'SecureBank ATM - Westfield', address: 'Westfield Sydney, Pitt Street Mall, Sydney NSW 2000', distance: '0.3 km', features: ['24hour', 'deposit'], type: 'atm' },
+                { name: 'SecureBank Circular Quay', address: '5 Circular Quay West, Sydney NSW 2000', distance: '0.5 km', features: ['branch', 'wheelchair'], type: 'branch' },
+                { name: 'SecureBank ATM - Central Station', address: 'Central Railway Station, Sydney NSW 2000', distance: '0.7 km', features: ['24hour'], type: 'atm' },
+                { name: 'SecureBank Bondi Junction', address: '500 Oxford Street, Bondi Junction NSW 2022', distance: '8.2 km', features: ['branch', 'deposit', 'wheelchair'], type: 'branch' },
+                { name: 'SecureBank ATM - Coles Bondi', address: 'Coles Bondi, 181-187 Campbell Parade, Bondi Beach NSW 2026', distance: '10.1 km', features: ['deposit'], type: 'atm' },
+                { name: 'SecureBank Parramatta', address: '153 Macquarie Street, Parramatta NSW 2150', distance: '24.3 km', features: ['branch', 'deposit', 'wheelchair', '24hour'], type: 'branch' },
+                { name: 'SecureBank ATM - Westfield Parramatta', address: 'Westfield Parramatta, 159-175 Church Street, Parramatta NSW 2150', distance: '24.5 km', features: ['24hour', 'deposit'], type: 'atm' },
+                { name: 'SecureBank Chatswood', address: '436 Victoria Avenue, Chatswood NSW 2067', distance: '15.8 km', features: ['branch', 'wheelchair'], type: 'branch' },
+                { name: 'SecureBank ATM - Macquarie Centre', address: 'Macquarie Centre, Cnr Waterloo & Herring Roads, North Ryde NSW 2113', distance: '18.9 km', features: ['24hour', 'deposit', 'wheelchair'], type: 'atm' }
+            ];
+
+            displayATMs(atmData);
+        }
+
+        function searchATMs() {
+            const location = document.getElementById('atmLocation').value;
+            const radius = document.getElementById('atmRadius').value;
+            
+            if (!location) {
+                alert('Please enter a location to search');
+                return;
+            }
+            
+            alert(`Searching for ATMs near "${location}" within ${radius} km...\\n\\nIn a real app, this would use geolocation and mapping services to find the nearest locations.`);
+            
+            // Simulate search results
+            loadDefaultATMs();
+        }
+
+        function displayATMs(atms) {
+            const container = document.getElementById('atmList');
+            container.innerHTML = '';
+
+            atms.forEach(atm => {
+                const atmItem = document.createElement('div');
+                atmItem.className = 'atm-item';
+                atmItem.dataset.features = atm.features.join(' ');
+                
+                const featuresHTML = atm.features.map(feature => {
+                    const labels = {
+                        '24hour': '24 Hour',
+                        'deposit': 'Cash Deposit',
+                        'wheelchair': 'Wheelchair',
+                        'branch': 'Full Branch'
+                    };
+                    return `<span class="feature-tag">${labels[feature] || feature}</span>`;
+                }).join('');
+
+                atmItem.innerHTML = `
+                    <div class="atm-icon">${atm.type === 'branch' ? '🏪' : '🏧'}</div>
+                    <div class="atm-info">
+                        <div class="atm-name">${atm.name}</div>
+                        <div class="atm-address">${atm.address}</div>
+                        <div class="atm-features">${featuresHTML}</div>
+                        <div class="atm-distance">${atm.distance} away</div>
+                    </div>
+                `;
+                container.appendChild(atmItem);
+            });
+        }
+
+        function filterATMs(filter) {
+            const atms = document.querySelectorAll('.atm-item');
+            
+            atms.forEach(atm => {
+                if (filter === 'all') {
+                    atm.style.display = 'flex';
+                } else {
+                    const features = atm.dataset.features;
+                    atm.style.display = features.includes(filter) ? 'flex' : 'none';
+                }
+            });
+        }
+
+        // Modal event listeners for new modals
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                if (document.getElementById('statementsModal').classList.contains('show')) {
+                    closeStatementsModal();
+                }
+                if (document.getElementById('creditApplicationModal').classList.contains('show')) {
+                    closeCreditApplicationModal();
+                }
+                if (document.getElementById('atmFinderModal').classList.contains('show')) {
+                    closeATMFinderModal();
+                }
+            }
+        });
+
+        // Close modals when clicking outside
+        document.getElementById('statementsModal').addEventListener('click', function(e) {
+            if (e.target === this) closeStatementsModal();
+        });
+
+        document.getElementById('creditApplicationModal').addEventListener('click', function(e) {
+            if (e.target === this) closeCreditApplicationModal();
+        });
+
+        document.getElementById('atmFinderModal').addEventListener('click', function(e) {
+            if (e.target === this) closeATMFinderModal();
+        });
     </script>
+    </div> <!-- End Main Banking Application -->
 </body>
 </html>
