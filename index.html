@@ -1868,6 +1868,7 @@
                 <a href="#transfers" onclick="openTransfersModal()">Transfers</a>
                 <a href="#payments" onclick="openPaymentModal()">Payments</a>
                 <a href="#support" onclick="openSupportModal()">Support</a>
+                <a href="#settings" onclick="openSettingsModal()">Settings</a>
                 <a href="#logout" class="login-btn" onclick="logout()">Sign Out</a>
             </nav>
         </div>
@@ -2894,6 +2895,62 @@
 
                 <div class="atm-list" id="atmList">
                     <!-- ATM results will be populated here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Settings Modal -->
+    <div id="settingsModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Settings</h2>
+                <button class="close-btn" onclick="closeSettingsModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div style="padding: 1rem;">
+                    <h3 style="margin-bottom: 1rem; color: #374151;">Account Settings</h3>
+                    
+                    <div style="margin-bottom: 2rem;">
+                        <h4 style="margin-bottom: 0.5rem; color: #374151;">Current Session</h4>
+                        <p style="font-size: 0.9rem; color: #6b7280; margin-bottom: 1rem;" id="sessionInfo">Loading session information...</p>
+                        
+                        <button class="btn btn-outline" onclick="clearSessionAndRelogin()" style="background: #dc2626; color: white; border-color: #dc2626;">
+                            🔄 Reset Settings & Force New Login
+                        </button>
+                        <p style="font-size: 0.8rem; color: #6b7280; margin-top: 0.5rem;">
+                            This will clear all stored session data and return you to the login screen.
+                        </p>
+                    </div>
+
+                    <div style="margin-bottom: 2rem;">
+                        <h4 style="margin-bottom: 0.5rem; color: #374151;">Demo Controls</h4>
+                        <button class="btn btn-outline" onclick="refreshDemoData()" style="margin-bottom: 0.5rem;">
+                            🎲 Refresh Demo Data
+                        </button>
+                        <p style="font-size: 0.8rem; color: #6b7280;">
+                            Refresh account balances and transaction data for demonstration purposes.
+                        </p>
+                    </div>
+
+                    <div style="margin-bottom: 2rem;">
+                        <h4 style="margin-bottom: 0.5rem; color: #374151;">Privacy</h4>
+                        <button class="btn btn-outline" onclick="clearAllBrowserData()">
+                            🗑️ Clear All Browser Data
+                        </button>
+                        <p style="font-size: 0.8rem; color: #6b7280; margin-top: 0.5rem;">
+                            Clear all stored data including session, preferences, and cache.
+                        </p>
+                    </div>
+
+                    <div style="border-top: 1px solid #e5e7eb; padding-top: 1rem; margin-top: 2rem;">
+                        <h4 style="margin-bottom: 0.5rem; color: #374151;">About</h4>
+                        <p style="font-size: 0.9rem; color: #6b7280;">
+                            SecureBank Demo v1.0<br>
+                            AI-Powered Banking Platform<br>
+                            Built with Claude Code
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -4565,6 +4622,119 @@ Your new balance is $${(fromAccountData.balance - amount).toFixed(2).replace(/\B
 
         document.getElementById('atmFinderModal').addEventListener('click', function(e) {
             if (e.target === this) closeATMFinderModal();
+        });
+
+        // Settings Modal Functions
+        function openSettingsModal() {
+            document.getElementById('settingsModal').classList.add('show');
+            updateSessionInfo();
+        }
+
+        function closeSettingsModal() {
+            document.getElementById('settingsModal').classList.remove('show');
+        }
+
+        function updateSessionInfo() {
+            const sessionInfo = document.getElementById('sessionInfo');
+            if (currentUser) {
+                const loginTime = new Date(currentUser.loginTime);
+                const sessionAge = Math.floor((Date.now() - loginTime.getTime()) / (1000 * 60)); // minutes
+                sessionInfo.innerHTML = `
+                    <strong>Logged in as:</strong> ${currentUser.username}<br>
+                    <strong>Session started:</strong> ${loginTime.toLocaleString()}<br>
+                    <strong>Session age:</strong> ${sessionAge} minutes<br>
+                    <strong>Session ID:</strong> ${currentUser.sessionId}
+                `;
+            } else {
+                sessionInfo.textContent = 'No active session found';
+            }
+        }
+
+        function clearSessionAndRelogin() {
+            if (confirm('Are you sure you want to reset all settings and force a new login? This will clear your current session.')) {
+                // Clear all session data
+                currentUser = null;
+                localStorage.removeItem('securebank_session');
+                
+                // Show success notification
+                const notification = document.createElement('div');
+                notification.style.cssText = `
+                    position: fixed;
+                    top: 20px;
+                    right: 20px;
+                    background: #dc2626;
+                    color: white;
+                    padding: 1rem 1.5rem;
+                    border-radius: 8px;
+                    z-index: 1002;
+                    font-weight: 600;
+                    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+                `;
+                notification.textContent = '🔄 Settings reset! Redirecting to login...';
+                document.body.appendChild(notification);
+                
+                // Close settings modal
+                closeSettingsModal();
+                
+                // Redirect to login after short delay
+                setTimeout(() => {
+                    document.body.removeChild(notification);
+                    document.getElementById('mainApp').classList.remove('show');
+                    document.getElementById('loginScreen').classList.remove('hidden');
+                    
+                    // Reset form
+                    document.getElementById('username').value = '';
+                    document.getElementById('password').value = '';
+                }, 1500);
+            }
+        }
+
+        function refreshDemoData() {
+            // Simulate refreshing account balances with small random changes
+            const accountCards = document.querySelectorAll('.account-balance:not(.negative)');
+            accountCards.forEach(card => {
+                const currentBalance = parseFloat(card.textContent.replace(/[$,]/g, ''));
+                const change = (Math.random() - 0.5) * 100; // Random change up to +/- $50
+                const newBalance = Math.max(0, currentBalance + change);
+                card.textContent = `$${newBalance.toFixed(2).replace(/\\B(?=(\\d{3})+(?!\\d))/g, ',')}`;
+            });
+            
+            alert('Demo data refreshed! Account balances have been updated with simulated changes.');
+        }
+
+        function clearAllBrowserData() {
+            if (confirm('Are you sure you want to clear ALL browser data for this site? This cannot be undone.')) {
+                // Clear localStorage
+                localStorage.clear();
+                
+                // Clear sessionStorage
+                sessionStorage.clear();
+                
+                // Clear any other site data
+                if ('caches' in window) {
+                    caches.keys().then(names => {
+                        names.forEach(name => caches.delete(name));
+                    });
+                }
+                
+                alert('All browser data has been cleared. The page will now reload.');
+                
+                // Reload the page to reset everything
+                setTimeout(() => {
+                    window.location.reload();
+                }, 1000);
+            }
+        }
+
+        // Settings modal event listeners
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && document.getElementById('settingsModal').classList.contains('show')) {
+                closeSettingsModal();
+            }
+        });
+
+        document.getElementById('settingsModal').addEventListener('click', function(e) {
+            if (e.target === this) closeSettingsModal();
         });
     </script>
     </div> <!-- End Main Banking Application -->
