@@ -999,6 +999,258 @@
             color: #dc2626;
         }
 
+        /* Accounts List Modal Styles */
+        .accounts-list-modal .modal-content {
+            max-width: 800px;
+        }
+
+        .accounts-list-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1.5rem;
+            border-bottom: 1px solid #e5e7eb;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .accounts-list-item:hover {
+            background-color: #f9fafb;
+        }
+
+        .accounts-list-item:last-child {
+            border-bottom: none;
+        }
+
+        .account-list-info {
+            flex: 1;
+        }
+
+        .account-list-name {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 0.25rem;
+        }
+
+        .account-list-details {
+            font-size: 0.875rem;
+            color: #6b7280;
+        }
+
+        .account-list-balance {
+            font-size: 1.3rem;
+            font-weight: 700;
+            text-align: right;
+        }
+
+        .account-list-balance.positive {
+            color: #16a34a;
+        }
+
+        .account-list-balance.negative {
+            color: #dc2626;
+        }
+
+        /* Transfers Modal Styles */
+        .transfers-modal .modal-content {
+            max-width: 700px;
+        }
+
+        .transfer-type-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .transfer-type-card {
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .transfer-type-card:hover, .transfer-type-card.selected {
+            border-color: #0066cc;
+            background: #f0f7ff;
+        }
+
+        .transfer-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .transfer-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #1a1a1a;
+        }
+
+        .transfer-description {
+            font-size: 0.875rem;
+            color: #6b7280;
+        }
+
+        /* Support Modal Styles */
+        .support-modal .modal-content {
+            max-width: 800px;
+        }
+
+        .chat-container {
+            height: 400px;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            background: #ffffff;
+        }
+
+        .chat-header {
+            background: #0066cc;
+            color: white;
+            padding: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .chat-messages {
+            flex: 1;
+            padding: 1rem;
+            overflow-y: auto;
+            background: #f9fafb;
+        }
+
+        .chat-message {
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+        }
+
+        .chat-message.user {
+            flex-direction: row-reverse;
+        }
+
+        .chat-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+        }
+
+        .chat-avatar.bot {
+            background: #0066cc;
+            color: white;
+        }
+
+        .chat-avatar.user {
+            background: #e5e7eb;
+            color: #1a1a1a;
+        }
+
+        .chat-bubble {
+            max-width: 80%;
+            padding: 0.75rem 1rem;
+            border-radius: 18px;
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+
+        .chat-bubble.bot {
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            color: #1a1a1a;
+        }
+
+        .chat-bubble.user {
+            background: #0066cc;
+            color: white;
+        }
+
+        .chat-input-container {
+            padding: 1rem;
+            border-top: 1px solid #e5e7eb;
+            background: white;
+        }
+
+        .chat-input-form {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .chat-input {
+            flex: 1;
+            padding: 0.75rem 1rem;
+            border: 1px solid #d1d5db;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            outline: none;
+        }
+
+        .chat-input:focus {
+            border-color: #0066cc;
+        }
+
+        .chat-send-btn {
+            background: #0066cc;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 20px;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .chat-send-btn:hover {
+            background: #0052a3;
+        }
+
+        .chat-send-btn:disabled {
+            background: #9ca3af;
+            cursor: not-allowed;
+        }
+
+        .suggested-questions {
+            margin-top: 1rem;
+        }
+
+        .suggested-questions h4 {
+            font-size: 0.875rem;
+            color: #6b7280;
+            margin-bottom: 0.5rem;
+        }
+
+        .question-chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .question-chip {
+            background: #f3f4f6;
+            border: 1px solid #e5e7eb;
+            border-radius: 16px;
+            padding: 0.5rem 0.75rem;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .question-chip:hover {
+            background: #e5e7eb;
+            border-color: #0066cc;
+        }
+
         @keyframes fadeIn {
             from { opacity: 0; }
             to { opacity: 1; }
@@ -1088,10 +1340,10 @@
                 🏦 SecureBank
             </div>
             <nav class="nav-links">
-                <a href="#accounts">Accounts</a>
-                <a href="#transfers">Transfers</a>
-                <a href="#payments">Payments</a>
-                <a href="#support">Support</a>
+                <a href="#accounts" onclick="openAccountsListModal()">Accounts</a>
+                <a href="#transfers" onclick="openTransfersModal()">Transfers</a>
+                <a href="#payments" onclick="openPaymentModal()">Payments</a>
+                <a href="#support" onclick="openSupportModal()">Support</a>
                 <a href="#login" class="login-btn">Sign In</a>
             </nav>
         </div>
@@ -1750,6 +2002,189 @@
                         <div class="transaction-list" id="transactionList">
                             <!-- Transactions will be populated dynamically -->
                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Accounts List Modal -->
+    <div id="accountsListModal" class="modal accounts-list-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Your Accounts</h2>
+                <button class="close-btn" onclick="closeAccountsListModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div id="accountsListView">
+                    <div id="accountsListContainer">
+                        <!-- Account list items will be populated here -->
+                    </div>
+                </div>
+                
+                <!-- Account Detail View (reused from main accounts modal) -->
+                <div id="accountsListDetailView" class="account-detail-view">
+                    <div class="detail-header">
+                        <button class="back-button" onclick="backToAccountsList()">←</button>
+                        <div class="detail-account-info">
+                            <h3 id="listDetailAccountName">Account Details</h3>
+                            <p id="listDetailAccountNumber">Account information</p>
+                        </div>
+                    </div>
+
+                    <div class="detail-balance" id="listDetailBalance">$0.00</div>
+
+                    <div class="account-features" id="listAccountFeatures">
+                        <!-- Features will be populated dynamically -->
+                    </div>
+
+                    <div class="transaction-history">
+                        <div class="transaction-history-header">
+                            <h4>Transaction History</h4>
+                            <div class="date-filter">
+                                <label>Period:</label>
+                                <select id="listPeriodFilter" onchange="filterListTransactions()">
+                                    <option value="30">Last 30 days</option>
+                                    <option value="90">Last 3 months</option>
+                                    <option value="365">Last 12 months</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="transaction-list" id="listTransactionList">
+                            <!-- Transactions will be populated dynamically -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Transfers Modal -->
+    <div id="transfersModal" class="modal transfers-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Transfer Between Accounts</h2>
+                <button class="close-btn" onclick="closeTransfersModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label class="form-label">From Account</label>
+                    <select class="form-select" id="transferFromAccount">
+                        <option value="">Select account to transfer from</option>
+                        <option value="everyday">Everyday Transaction (••••1234) - $4,287.50</option>
+                        <option value="premium">Premium Transaction (••••9876) - $1,856.75</option>
+                        <option value="savings">High Interest Savings (••••5678) - $15,920.00</option>
+                        <option value="goalSaver">Goal Saver - Holiday Fund (••••7654) - $8,245.20</option>
+                        <option value="offset">Home Loan Offset (••••4567) - $52,340.85</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">To Account</label>
+                    <select class="form-select" id="transferToAccount">
+                        <option value="">Select account to transfer to</option>
+                        <option value="everyday">Everyday Transaction (••••1234)</option>
+                        <option value="premium">Premium Transaction (••••9876)</option>
+                        <option value="savings">High Interest Savings (••••5678)</option>
+                        <option value="goalSaver">Goal Saver - Holiday Fund (••••7654)</option>
+                        <option value="offset">Home Loan Offset (••••4567)</option>
+                        <option value="creditCard">Platinum Credit Card (••••1234)</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Transfer Amount (AUD)</label>
+                    <input type="number" class="form-input" id="transferAmount" placeholder="0.00" step="0.01" min="0.01" oninput="updateTransferTotal()">
+                    <div class="form-help">Minimum transfer: $0.01 • No fees for transfers between your own accounts</div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Reference/Description</label>
+                    <input type="text" class="form-input" id="transferReference" placeholder="Transfer reference (optional)" maxlength="100">
+                    <div class="form-help">This will appear on both account statements</div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Transfer Timing</label>
+                    <select class="form-select" id="transferTiming" onchange="toggleTransferSchedule()">
+                        <option value="now">Transfer Now</option>
+                        <option value="scheduled">Schedule for Later</option>
+                    </select>
+                </div>
+
+                <div id="transferScheduleFields" style="display: none;">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">Transfer Date</label>
+                            <input type="date" class="form-input" id="transferDate">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Repeat</label>
+                            <select class="form-select" id="transferRecurring">
+                                <option value="none">One-time Transfer</option>
+                                <option value="weekly">Weekly</option>
+                                <option value="fortnightly">Fortnightly</option>
+                                <option value="monthly">Monthly</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="amount-display">
+                    <div class="amount-label">Transfer Summary</div>
+                    <div class="amount-value" id="totalTransferAmount">$0.00</div>
+                    <div class="form-help">No fees • Instant transfer between your SecureBank accounts</div>
+                </div>
+
+                <div class="form-actions">
+                    <button class="btn btn-cancel" onclick="closeTransfersModal()">Cancel</button>
+                    <button class="btn btn-submit" onclick="processInternalTransfer()">Transfer Money</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Support Modal -->
+    <div id="supportModal" class="modal support-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">SecureBank Support</h2>
+                <button class="close-btn" onclick="closeSupportModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="chat-container">
+                    <div class="chat-header">
+                        <div>🤖</div>
+                        <div>
+                            <strong>SecureBank Assistant</strong><br>
+                            <small>Online - Ready to help</small>
+                        </div>
+                    </div>
+                    <div class="chat-messages" id="chatMessages">
+                        <div class="chat-message">
+                            <div class="chat-avatar bot">🏦</div>
+                            <div class="chat-bubble bot">
+                                Hello! I'm your SecureBank virtual assistant. I can help you with account information, banking services, transfers, payments, and general banking questions. How can I assist you today?
+                            </div>
+                        </div>
+                    </div>
+                    <div class="chat-input-container">
+                        <form class="chat-input-form" onsubmit="sendChatMessage(event)">
+                            <input type="text" class="chat-input" id="chatInput" placeholder="Type your question here..." autocomplete="off">
+                            <button type="submit" class="chat-send-btn" id="chatSendBtn">Send</button>
+                        </form>
+                    </div>
+                </div>
+                
+                <div class="suggested-questions">
+                    <h4>Popular Questions:</h4>
+                    <div class="question-chips">
+                        <span class="question-chip" onclick="askSuggestedQuestion('How do I transfer money between my accounts?')">How do I transfer money?</span>
+                        <span class="question-chip" onclick="askSuggestedQuestion('What are the interest rates on savings accounts?')">Interest rates</span>
+                        <span class="question-chip" onclick="askSuggestedQuestion('How do I set up BPAY payments?')">BPAY setup</span>
+                        <span class="question-chip" onclick="askSuggestedQuestion('What fees do you charge?')">Banking fees</span>
+                        <span class="question-chip" onclick="askSuggestedQuestion('How do I increase my credit limit?')">Credit limit</span>
+                        <span class="question-chip" onclick="askSuggestedQuestion('What is an offset account?')">Offset accounts</span>
                     </div>
                 </div>
             </div>
@@ -2564,6 +2999,358 @@ You will receive email confirmation once sent.`);
         document.getElementById('accountsModal').addEventListener('click', function(e) {
             if (e.target === this) {
                 closeAccountsModal();
+            }
+        });
+
+        // New Navigation Modal Functions
+        
+        // Accounts List Modal Functions
+        function openAccountsListModal() {
+            document.getElementById('accountsListModal').classList.add('show');
+            populateAccountsList();
+        }
+        
+        function closeAccountsListModal() {
+            document.getElementById('accountsListModal').classList.remove('show');
+        }
+        
+        function populateAccountsList() {
+            const container = document.getElementById('accountsListContainer');
+            container.innerHTML = '';
+            
+            Object.entries(accountData).forEach(([key, account]) => {
+                const accountItem = document.createElement('div');
+                accountItem.className = 'account-list-item';
+                accountItem.innerHTML = `
+                    <div class="account-list-info">
+                        <div class="account-list-name">${account.name}</div>
+                        <div class="account-list-number">${account.number}</div>
+                    </div>
+                    <div class="account-list-balance ${account.balance < 0 ? 'negative' : ''}">${account.balance < 0 ? '-$' + Math.abs(account.balance).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',') : '$' + account.balance.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</div>
+                `;
+                accountItem.addEventListener('click', () => showAccountTransactions(key, account));
+                container.appendChild(accountItem);
+            });
+        }
+        
+        function showAccountTransactions(accountKey, account) {
+            closeAccountsListModal();
+            
+            // Update the account details modal with the selected account
+            document.querySelector('#accountsModal .modal-title').textContent = account.name;
+            document.querySelector('#accountsModal .account-number').textContent = account.number;
+            document.querySelector('#accountsModal .account-balance').textContent = account.balance < 0 ? '-$' + Math.abs(account.balance).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',') : '$' + account.balance.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+            document.querySelector('#accountsModal .account-balance').className = `account-balance ${account.balance < 0 ? 'negative' : ''}`;
+            
+            // Update features
+            const featuresContainer = document.querySelector('#accountsModal .account-features');
+            featuresContainer.innerHTML = '';
+            account.features.forEach(feature => {
+                const featureDiv = document.createElement('div');
+                featureDiv.className = 'account-feature';
+                featureDiv.innerHTML = `
+                    <span class="feature-label">${feature.label}:</span>
+                    <span class="feature-value">${feature.value}</span>
+                `;
+                featuresContainer.appendChild(featureDiv);
+            });
+            
+            // Update transactions
+            const transactionsContainer = document.querySelector('#accountsModal .transaction-history');
+            transactionsContainer.innerHTML = '';
+            account.transactions.forEach(transaction => {
+                const transactionDiv = document.createElement('div');
+                transactionDiv.className = 'transaction';
+                transactionDiv.innerHTML = `
+                    <div class="transaction-icon">${transaction.icon}</div>
+                    <div class="transaction-details">
+                        <div class="transaction-description">${transaction.description}</div>
+                        <div class="transaction-date">${transaction.date}</div>
+                        <div class="transaction-category">${transaction.category}</div>
+                    </div>
+                    <div class="transaction-amount ${transaction.amount < 0 ? 'negative' : 'positive'}">
+                        ${transaction.amount < 0 ? '-$' + Math.abs(transaction.amount).toFixed(2) : '+$' + transaction.amount.toFixed(2)}
+                    </div>
+                `;
+                transactionsContainer.appendChild(transactionDiv);
+            });
+            
+            // Show the account details modal
+            document.getElementById('accountsModal').classList.add('show');
+        }
+        
+        // Transfers Modal Functions
+        function openTransfersModal() {
+            document.getElementById('transfersModal').classList.add('show');
+            populateTransferAccounts();
+        }
+        
+        function closeTransfersModal() {
+            document.getElementById('transfersModal').classList.remove('show');
+            resetTransferForm();
+        }
+        
+        function populateTransferAccounts() {
+            const fromSelect = document.getElementById('fromAccountTransfer');
+            const toSelect = document.getElementById('toAccountTransfer');
+            
+            // Clear existing options
+            fromSelect.innerHTML = '<option value="">Select account</option>';
+            toSelect.innerHTML = '<option value="">Select account</option>';
+            
+            // Add account options
+            Object.entries(accountData).forEach(([key, account]) => {
+                if (account.balance >= 0) { // Only show accounts with positive balance for from account
+                    const option = document.createElement('option');
+                    option.value = key;
+                    option.textContent = `${account.name} - $${account.balance.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',')}`;
+                    fromSelect.appendChild(option);
+                }
+                
+                const toOption = document.createElement('option');
+                toOption.value = key;
+                toOption.textContent = `${account.name} (${account.number})`;
+                toSelect.appendChild(toOption);
+            });
+            
+            // Add event listeners for account change
+            fromSelect.addEventListener('change', updateTransferPreview);
+            toSelect.addEventListener('change', updateTransferPreview);
+            document.getElementById('transferAmount').addEventListener('input', updateTransferPreview);
+        }
+        
+        function updateTransferPreview() {
+            const fromAccount = document.getElementById('fromAccountTransfer').value;
+            const toAccount = document.getElementById('toAccountTransfer').value;
+            const amount = parseFloat(document.getElementById('transferAmount').value) || 0;
+            const preview = document.getElementById('transferPreview');
+            
+            if (fromAccount && toAccount && amount > 0) {
+                const fromAccountData = accountData[fromAccount];
+                const toAccountData = accountData[toAccount];
+                
+                if (fromAccount === toAccount) {
+                    preview.innerHTML = '<div style="color: #dc2626;">Cannot transfer to the same account</div>';
+                    return;
+                }
+                
+                if (amount > fromAccountData.balance) {
+                    preview.innerHTML = '<div style="color: #dc2626;">Insufficient funds</div>';
+                    return;
+                }
+                
+                preview.innerHTML = `
+                    <div style="padding: 1rem; background: #f8fafc; border-radius: 8px; margin-top: 1rem;">
+                        <h4 style="margin: 0 0 0.5rem 0; color: #374151;">Transfer Preview</h4>
+                        <p style="margin: 0.25rem 0;"><strong>From:</strong> ${fromAccountData.name}</p>
+                        <p style="margin: 0.25rem 0;"><strong>To:</strong> ${toAccountData.name}</p>
+                        <p style="margin: 0.25rem 0;"><strong>Amount:</strong> $${amount.toFixed(2)}</p>
+                        <p style="margin: 0.25rem 0; color: #059669;"><strong>Processing:</strong> Instant transfer</p>
+                        <p style="margin: 0.25rem 0; font-size: 0.9rem; color: #6b7280;">New balance: $${(fromAccountData.balance - amount).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</p>
+                    </div>
+                `;
+            } else {
+                preview.innerHTML = '';
+            }
+        }
+        
+        function processTransfer() {
+            const fromAccount = document.getElementById('fromAccountTransfer').value;
+            const toAccount = document.getElementById('toAccountTransfer').value;
+            const amount = parseFloat(document.getElementById('transferAmount').value) || 0;
+            const description = document.getElementById('transferDescription').value;
+            
+            if (!fromAccount || !toAccount || !amount) {
+                alert('Please fill in all required fields');
+                return;
+            }
+            
+            if (fromAccount === toAccount) {
+                alert('Cannot transfer to the same account');
+                return;
+            }
+            
+            const fromAccountData = accountData[fromAccount];
+            const toAccountData = accountData[toAccount];
+            
+            if (amount > fromAccountData.balance) {
+                alert('Insufficient funds');
+                return;
+            }
+            
+            alert(`Transfer Successful!
+            
+From: ${fromAccountData.name}
+To: ${toAccountData.name}
+Amount: $${amount.toFixed(2)}
+${description ? 'Description: ' + description : ''}
+
+This transfer has been processed instantly.
+Your new balance is $${(fromAccountData.balance - amount).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',')}`);
+            
+            closeTransfersModal();
+        }
+        
+        function resetTransferForm() {
+            document.getElementById('fromAccountTransfer').value = '';
+            document.getElementById('toAccountTransfer').value = '';
+            document.getElementById('transferAmount').value = '';
+            document.getElementById('transferDescription').value = '';
+            document.getElementById('transferPreview').innerHTML = '';
+        }
+        
+        // Support Modal Functions
+        function openSupportModal() {
+            document.getElementById('supportModal').classList.add('show');
+            initializeChatBot();
+        }
+        
+        function closeSupportModal() {
+            document.getElementById('supportModal').classList.remove('show');
+        }
+        
+        function initializeChatBot() {
+            const chatMessages = document.getElementById('chatMessages');
+            chatMessages.innerHTML = `
+                <div class="chat-message bot-message">
+                    <div class="message-avatar">🏦</div>
+                    <div class="message-content">
+                        <div class="message-text">Hello! I'm your SecureBank AI Assistant. How can I help you today?</div>
+                        <div class="message-time">${new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</div>
+                    </div>
+                </div>
+            `;
+            
+            // Add quick action buttons
+            addQuickActions();
+        }
+        
+        function addQuickActions() {
+            const chatMessages = document.getElementById('chatMessages');
+            const quickActions = document.createElement('div');
+            quickActions.className = 'quick-actions';
+            quickActions.innerHTML = `
+                <div class="quick-action-title">Quick Actions:</div>
+                <button class="quick-action-btn" onclick="askQuestion('What are my account balances?')">Account Balances</button>
+                <button class="quick-action-btn" onclick="askQuestion('How do I transfer money?')">Transfer Money</button>
+                <button class="quick-action-btn" onclick="askQuestion('What are your fees?')">Banking Fees</button>
+                <button class="quick-action-btn" onclick="askQuestion('How do I pay bills?')">Pay Bills</button>
+            `;
+            chatMessages.appendChild(quickActions);
+        }
+        
+        function sendMessage() {
+            const input = document.getElementById('chatInput');
+            const message = input.value.trim();
+            
+            if (!message) return;
+            
+            // Add user message
+            const chatMessages = document.getElementById('chatMessages');
+            const userMessage = document.createElement('div');
+            userMessage.className = 'chat-message user-message';
+            userMessage.innerHTML = `
+                <div class="message-content">
+                    <div class="message-text">${message}</div>
+                    <div class="message-time">${new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</div>
+                </div>
+                <div class="message-avatar">👤</div>
+            `;
+            chatMessages.appendChild(userMessage);
+            
+            input.value = '';
+            
+            // Simulate AI response
+            setTimeout(() => {
+                const botResponse = getBotResponse(message);
+                const botMessage = document.createElement('div');
+                botMessage.className = 'chat-message bot-message';
+                botMessage.innerHTML = `
+                    <div class="message-avatar">🏦</div>
+                    <div class="message-content">
+                        <div class="message-text">${botResponse}</div>
+                        <div class="message-time">${new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</div>
+                    </div>
+                `;
+                chatMessages.appendChild(botMessage);
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            }, 1000 + Math.random() * 1000);
+            
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+        
+        function askQuestion(question) {
+            document.getElementById('chatInput').value = question;
+            sendMessage();
+        }
+        
+        function getBotResponse(message) {
+            const lowerMessage = message.toLowerCase();
+            
+            if (lowerMessage.includes('balance')) {
+                return "Your current account balances are: Transaction Account $4,287.50, High Interest Savings $12,750.00, Home Loan -$285,000.00. Would you like more details about any specific account?";
+            } else if (lowerMessage.includes('transfer')) {
+                return "To transfer money between your accounts, click on 'Transfers' in the main menu. You can also transfer to external accounts using BSB and account numbers or PayID. All internal transfers are instant and free!";
+            } else if (lowerMessage.includes('fee')) {
+                return "Our fee structure includes: Account keeping fees $0/month, Domestic transfers $0 (NPP), International transfers $25 + exchange rate margin, ATM withdrawals $0 at our network, $2.50 elsewhere. Need details about specific fees?";
+            } else if (lowerMessage.includes('bill')) {
+                return "You can pay bills through our BPAY system! Click 'Payments' then 'Pay Bills' to access over 30,000 Australian billers. Just enter the biller code and your reference number. Most payments are processed instantly.";
+            } else if (lowerMessage.includes('help') || lowerMessage.includes('support')) {
+                return "I can help with account inquiries, transfers, bill payments, and general banking questions. For complex issues or to speak with a human agent, call us at 13 2265 (24/7) or visit your nearest branch.";
+            } else if (lowerMessage.includes('card') || lowerMessage.includes('atm')) {
+                return "For card-related issues: Lost/stolen cards can be blocked instantly in the app under 'Card Controls'. New cards arrive in 2-3 business days. ATM daily limit is $2,000, EFTPOS limit is $5,000. Need help with something specific?";
+            } else if (lowerMessage.includes('loan') || lowerMessage.includes('mortgage')) {
+                return "Your current home loan balance is $285,000. Interest rate: 5.89% p.a. Next payment due: $1,856.00 on Aug 15. For rate reviews, refinancing, or extra payments, I can connect you with our lending specialist.";
+            } else if (lowerMessage.includes('statement') || lowerMessage.includes('transaction')) {
+                return "Statements are available monthly via the app or email. Transaction history shows in real-time. For older transactions, use the date filter in your account details. PDF statements can be downloaded for up to 7 years.";
+            } else {
+                return "I understand you're asking about banking services. Could you please be more specific? I can help with account balances, transfers, bill payments, fees, cards, loans, or general banking questions. What would you like to know?";
+            }
+        }
+        
+        // Add event listener for Enter key in chat input
+        document.addEventListener('DOMContentLoaded', function() {
+            const chatInput = document.getElementById('chatInput');
+            if (chatInput) {
+                chatInput.addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter') {
+                        sendMessage();
+                    }
+                });
+            }
+        });
+        
+        // Update event listeners for new modals
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                if (document.getElementById('accountsListModal').classList.contains('show')) {
+                    closeAccountsListModal();
+                }
+                if (document.getElementById('transfersModal').classList.contains('show')) {
+                    closeTransfersModal();
+                }
+                if (document.getElementById('supportModal').classList.contains('show')) {
+                    closeSupportModal();
+                }
+            }
+        });
+        
+        // Close new modals when clicking outside
+        document.getElementById('accountsListModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeAccountsListModal();
+            }
+        });
+        
+        document.getElementById('transfersModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeTransfersModal();
+            }
+        });
+        
+        document.getElementById('supportModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeSupportModal();
             }
         });
 
